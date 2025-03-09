@@ -35,6 +35,7 @@ def generate_roadmap():
     - title: The topic name (e.g., "HTML Basics", "React Components")
     
     
+    
     Ensure the output contains:
     1. Nodes: Key learning milestones from beginner to advanced levels.
     2. Edges: Define connections between nodes to represent learning flow.

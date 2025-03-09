@@ -10,7 +10,7 @@ const RoadmapGenerator = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Function to fetch and process the roadmap
+  
   const handleGenerateRoadmap = async () => {
     if (!keyword) {
       setError("Please enter a keyword.");
