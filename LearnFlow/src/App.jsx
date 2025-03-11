@@ -28,29 +28,24 @@ const RoadmapGenerator = () => {
       
       console.log("API Response:", response.data);
       // Check if nodes and edges are included in the response
-      const { nodes, edges } = response.data;
-  
-      if (!nodes || !edges) {
-        setError("Missing nodes or edges in the data.");
-        return;
-      }
+      const { nodes = [], edges = [] } = response.data || {};
+
+      
   
       // Format nodes for React Flow
-      const formattedNodes = nodes.map((node) => ({
+      const formattedNodes = nodes?.map((node) => ({
         id: node.id.toString(),  // Ensure the ID is a string for React Flow
         position: { x: Math.random() * 250, y: Math.random() * 100 },  // Basic auto-layout
         data: {
-          label: node.title,
-          description: node.description,
-        },
+          label: node.title
+        }
       }));
   
       // Format edges for React Flow
-      const formattedEdges = edges.map((edge, index) => ({
+      const formattedEdges = edges?.map((edge, index) => ({
         id: `edge-${index + 1}`,  // Unique ID for each edge
         source: edge.source.toString(),  // Ensure source is a string
         target: edge.target.toString(),  // Ensure target is a string
-        animated: true,  // Optional: Makes the edges animated
       }));
   
       // Set nodes and edges in state
