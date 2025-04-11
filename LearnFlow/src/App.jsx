@@ -1,63 +1,10 @@
-import React, { useState } from "react";
-import axios from "axios";
-import ReactFlow, { MiniMap, Controls, Background } from "reactflow";
-import "reactflow/dist/style.css";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
-const RoadmapGenerator = () => {
-  const [keyword, setKeyword] = useState("");
-  const [nodes, setNodes] = useState([]);
-  const [edges, setEdges] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  
-  const handleGenerateRoadmap = async () => {
-    if (!keyword) {
-      setError("Please enter a keyword.");
-      return;
-    }
-  
-    setLoading(true);
-    setError(null);
-  
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/generate_roadmap",
-        { keyword }
-      );
-      
-      console.log("API Response:", response.data);
-      // Check if nodes and edges are included in the response
-      const { nodes = [], edges = [] } = response.data || {};
-
-      
-  
-      // Format nodes for React Flow
-      const formattedNodes = nodes?.map((node) => ({
-        id: node.id.toString(),  // Ensure the ID is a string for React Flow
-        position: { x: Math.random() * 250, y: Math.random() * 100 },  // Basic auto-layout
-        data: {
-          label: node.title
-        }
-      }));
-  
-      // Format edges for React Flow
-      const formattedEdges = edges?.map((edge, index) => ({
-        id: `edge-${index + 1}`,  // Unique ID for each edge
-        source: edge.source.toString(),  // Ensure source is a string
-        target: edge.target.toString(),  // Ensure target is a string
-      }));
-  
-      // Set nodes and edges in state
-      setNodes(formattedNodes);
-      setEdges(formattedEdges);
-    } catch (error) {
-      setError("Failed to generate roadmap. Please try again.");
-      console.error("API Error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+function App() {
+  const [count, setCount] = useState(0)
 
   return (
     <div style={{ width: "100vw", height: "100vh", padding: "20px" }}>
@@ -88,4 +35,4 @@ const RoadmapGenerator = () => {
   );
 };
 
-export default RoadmapGenerator;
+export default App
