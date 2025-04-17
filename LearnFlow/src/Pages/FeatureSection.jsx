@@ -72,6 +72,7 @@ const styles = {
   robotImage: {
     width: "445px",
     height: "auto",
+    animation: "anim 3s ease-in-out infinite",
   },
 };
 
