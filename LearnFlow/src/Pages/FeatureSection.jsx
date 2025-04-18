@@ -7,7 +7,7 @@ const FeatureSection = () => {
       <div style={styles.textContainer}>
         <h1 style={styles.heading}>
           Giving Your Awesome <br />
-          hello Business Fresh Start With US
+          Business Fresh Start With US
         </h1>
         <p style={styles.subtext}>
           Giving Your Awesome Business Fresh Start With US
