@@ -39,7 +39,7 @@ def generate_roadmap():
         ],
         "edges": [
           {{
-            "id": "1->2",
+            "id": "1",
             "source": "1",
             "target": "2",
             "label": "Next"
