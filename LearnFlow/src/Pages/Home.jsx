@@ -20,7 +20,7 @@ const Home = ({ onGetStarted }) => {
         <h1 className='text-container' style={{ fontSize: "3rem", fontWeight: "bold" }}>
           Start Your Learning Path
           <br />
-          With Our Services
+          With Our Services kjdshkfjhsdf
         </h1>
         <p style={{ fontSize: "1.2rem", margin: "20px 0" }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />
