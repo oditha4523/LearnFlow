@@ -5,19 +5,29 @@ const FeatureSection = () => {
   return (
     <div style={styles.container}>
       <div style={styles.textContainer}>
-        <h1 style={styles.heading}>Giving Your Awesome <br /> Business Fresh Start With US</h1>
-        <p style={styles.subtext}>Giving Your Awesome Business Fresh Start With US</p>
-        <p style={styles.subtext}>Giving Your Awesome Business Fresh Start With US</p>
+        <h1 style={styles.heading}>
+          Giving Your Awesome <br /> hi Business Fresh Start With US
+        </h1>
+        <p style={styles.subtext}>
+          Giving Your Awesome Business Fresh Start With US
+        </p>
+        <p style={styles.subtext}>
+          Giving Your Awesome Business Fresh Start With US
+        </p>
         <div style={styles.boxContainer}>
           <div style={styles.box}>
             <div style={styles.square}></div>
             <p style={styles.boxTitle}>NEW DESIGN</p>
-            <p style={styles.boxDescription}>Giving Your Awesome ddddd Business Fresh Start</p>
+            <p style={styles.boxDescription}>
+              Giving Your Awesome ddddd Business Fresh Start
+            </p>
           </div>
           <div style={styles.box}>
             <div style={styles.square}></div>
             <p style={styles.boxTitle}>NEW DESIGN</p>
-            <p style={styles.boxDescription}>Giving Your Awesome Business Fresh Start With US</p>
+            <p style={styles.boxDescription}>
+              Giving Your Awesome Business Fresh Start With US
+            </p>
           </div>
         </div>
       </div>
