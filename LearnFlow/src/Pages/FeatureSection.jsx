@@ -9,7 +9,7 @@ const FeatureSection = () => {
           Giving Your Awesome <br /> hi Business Fresh Start With US
         </h1>
         <p style={styles.subtext}>
-          Giving Your Awesome Business Fresh Start With US
+          Giving Your Awesome Business Fresh Start With US. Enjoy!
         </p>
         <p style={styles.subtext}>
           Giving Your Awesome Business Fresh Start With US
