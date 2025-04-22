@@ -29,13 +29,16 @@ const FeatureSection2 = () => {
 const styles = {
   container: {
     display: "flex",
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     padding: "60px 10%",
+    flexWrap: "wrap", //  Added for wrapping on smaller screens (for responsive)
   },
   textContainer: {
     flex: 1,
     textAlign: "left",
+    minWidth: "300px", // Ensures proper wrapping (for responsive)
   },
   heading: {
     fontSize: "3.5rem",
@@ -51,9 +54,12 @@ const styles = {
     display: "flex",
     gap: "50px",
     marginTop: "60px",
+    flexWrap: "wrap", // Added for mobile wrapping (for responsive)
   },
   box: {
     textAlign: "left",
+    flex: "1 1 200px", // Responsive box sizing (for responsive)
+    minWidth: "200px",
   },
   square: {
     width: "60px",
@@ -71,10 +77,13 @@ const styles = {
     fontSize: "0.9rem",
   },
   robotImage: {
-    width: "445px",
+    width: "100%",
+    maxWidth: "445px", // Limit image width (for responsive)
     height: "auto",
     marginRight: "50px",
     animation: "float 3s ease-in-out infinite",
+    flex: "1 1 300px", // Responsive image sizing (for responsive)
+    marginBottom: "40px", //  Space below image on wrap (for responsive)
   },
 };
 
