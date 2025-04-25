@@ -1,6 +1,7 @@
 import React from 'react';
 import image from '../assets/bgggg.png';
 import CardContainer from '../components/CardContainer';
+import IconSlider from '../components/IconSlider';
 
 const Home = ({ onGetStarted }) => {
   return (
@@ -44,6 +45,7 @@ const Home = ({ onGetStarted }) => {
         </button>
       </div>
       <CardContainer />
+      <IconSlider />
     </div>
   );
 };
