@@ -1,106 +1,94 @@
 import React, { useState } from "react";
 import axios from "axios";
-import ReactFlow, { MiniMap, Controls, Background } from "reactflow";
+import ReactFlow, { MiniMap, Controls, Background, ReactFlowProvider, useReactFlow, useNodesState, useEdgesState } from "reactflow";
 import "reactflow/dist/style.css";
 import FeatureSection2 from './Pages/FeatureSection2';
 import Home from './Pages/Home';
 import FeatureSection from "./Pages/FeatureSection";
 import Footer from "./Pages/Footer";
 
-const RoadmapGenerator = () => {
-  const [keyword, setKeyword] = useState("");
-  const [nodes, setNodes] = useState([]);
-  const [edges, setEdges] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+import { initialNodes, initialEdges } from './components/nodes-edges';
+import '@xyflow/react/dist/style.css';
 
-  const handleGenerateRoadmap = async () => {
-    if (!keyword) {
-      setError("Please enter a keyword.");
-      return;
-    }
+const getLayoutedElements = (nodes, edges) => {
+  return { nodes, edges };
+};
 
-    setLoading(true);
-    setError(null);
+const LayoutFlow = () => {
+  const { fitView } = useReactFlow();
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [keyword, setKeyword] = useState('');
 
+  const fetchRoadmap = async (keyword) => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/generate_roadmap",
-        { keyword }
-      );
-
-      console.log("API Response:", response.data);
-      const { nodes = [], edges = [] } = response.data || {};
-
-      const formattedNodes = nodes?.map((node) => ({
-        id: node.id.toString(),
-        position: { x: Math.random() * 250, y: Math.random() * 100 },
-        data: {
-          label: node.title,
+      const response = await fetch('http://localhost:5000/generate_roadmap', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      }));
+        body: JSON.stringify({ keyword }),
+      });
 
-      const formattedEdges = edges?.map((edge, index) => ({
-        id: `edge-${index + 1}`,
-        source: edge.source.toString(),
-        target: edge.target.toString(),
-      }));
+      const result = await response.json();
 
-      setNodes(formattedNodes);
-      setEdges(formattedEdges);
+      // The result is a string like: "const nodes = [...]; const edges = [...];"
+      // We'll evaluate it safely by extracting the objects
+      const nodesMatch = result.match(/nodes\s*=\s*(\[[\s\S]*?\]);/);
+      const edgesMatch = result.match(/edges\s*=\s*(\[[\s\S]*?\]);/);
+
+      if (nodesMatch && edgesMatch) {
+        const newNodes = eval(nodesMatch[1]);
+        const newEdges = eval(edgesMatch[1]);
+        setNodes(newNodes);
+        setEdges(newEdges);
+        fitView();
+      } else {
+        console.error('Invalid response format:', result);
+      }
     } catch (error) {
-      setError("Failed to generate roadmap. Please try again.");
-      console.error("API Error:", error);
-    } finally {
-      setLoading(false);
+      console.error('Error fetching roadmap:', error);
     }
   };
 
-  return (
-    <div style={{ width: "100vw", height: "100vh", padding: "20px" }}>
-      <h1>Programming Roadmap Generator</h1>
 
-      <div style={{ marginBottom: "20px" }}>
+  return (
+    <div style={{ width: '70%', height: '50vh', alignItems:'center',position:'relative' }}>
+      <div style={{ padding: '10px', background: '#f0f0f0' }}>
         <input
           type="text"
-          placeholder="Enter a keyword (e.g., React)"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
+          placeholder="Enter keyword..."
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              fetchRoadmap(e.target.value);
+            }
+          }}
+          style={{ margin: '10px', padding: '5px', width: '250px' }}
         />
-        <button onClick={handleGenerateRoadmap} disabled={loading}>
-          {loading ? "Generating..." : "Generate Roadmap"}
+        <button
+          onClick={() => fetchRoadmap(inputRef.current.value)}
+          style={{ padding: '6px 12px', cursor: 'pointer' }}
+        >
+          Generate
         </button>
       </div>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      <div style={{ width: "100%", height: "80vh", border: "1px solid #ccc" }}>
-        <ReactFlow nodes={nodes} edges={edges} fitView>
-          <MiniMap />
-          <Controls />
-          <Background />
-        </ReactFlow>
-      </div>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        fitView
+      />
     </div>
   );
 };
 
 const App = () => {
-  const [showRoadmapGenerator, setShowRoadmapGenerator] = useState(true);
-
   return (
     <div>
-      {!showRoadmapGenerator ? (
-        <>
-          <Home onGetStarted={() => setShowRoadmapGenerator(true)} />
-          <FeatureSection />
-          <FeatureSection2 />
-        </>
-      ) : (
-        <RoadmapGenerator />
-      )}
-      {/* Footer is always displayed at the bottom */}
-      <Footer />
+      <ReactFlowProvider>
+        <LayoutFlow />
+      </ReactFlowProvider>
     </div>
   );
 };
