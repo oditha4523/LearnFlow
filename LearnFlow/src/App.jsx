@@ -86,7 +86,7 @@ const RoadmapGenerator = () => {
 };
 
 const App = () => {
-  const [showRoadmapGenerator, setShowRoadmapGenerator] = useState(false);
+  const [showRoadmapGenerator, setShowRoadmapGenerator] = useState(true);
 
   return (
     <div>
