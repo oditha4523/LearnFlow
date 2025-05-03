@@ -1,6 +1,7 @@
 import React from 'react';
 import image from '../assets/bgggg.png';
 import CardContainer from '../components/CardContainer';
+import IconSlider from '../components/IconSlider';
 
 const Home = ({ onGetStarted }) => {
   return (
@@ -20,7 +21,7 @@ const Home = ({ onGetStarted }) => {
         <h1 className='text-container' style={{ fontSize: "3rem", fontWeight: "bold" }}>
           Start Your Learning Path
           <br />
-          With Our Services
+          With Our Services kjdshkfjhsdf
         </h1>
         <p style={{ fontSize: "1.2rem", margin: "20px 0" }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />
@@ -44,6 +45,7 @@ const Home = ({ onGetStarted }) => {
         </button>
       </div>
       <CardContainer />
+      <IconSlider />
     </div>
   );
 };
