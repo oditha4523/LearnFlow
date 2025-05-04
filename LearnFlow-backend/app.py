@@ -4,12 +4,41 @@ from flask import Flask, jsonify, request
 from dotenv import load_dotenv
 from flask_cors import CORS
 import json
+from werkzeug.security import generate_password_hash, check_password_hash
+from models import users_collection
 
 load_dotenv()
 
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route("/signup", methods=["POST"])
+def signup():
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+
+    if users_collection.find_one({"username": username}):
+        return jsonify({"message": "User already exists"}), 400
+
+    hashed_pw = generate_password_hash(password)
+    users_collection.insert_one({"username": username, "password": hashed_pw})
+    return jsonify({"message": "User created"}), 201
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+
+    user = users_collection.find_one({"username": username})
+    if not user or not check_password_hash(user["password"], password):
+        return jsonify({"message": "Invalid credentials"}), 401
+
+    return jsonify({"message": "Login successful"}), 200
+
+
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 # Configure the API Key for the Google Generative AI

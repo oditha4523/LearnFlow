@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import ReactFlow, { MiniMap, Controls, Background } from "reactflow";
 import "reactflow/dist/style.css";
-import FeatureSection2 from './Pages/FeatureSection2';
-import Home from './Pages/Home';
+import FeatureSection2 from "./Pages/FeatureSection2";
+import Home from "./Pages/Home";
 import FeatureSection from "./Pages/FeatureSection";
 import Footer from "./Pages/Footer";
+import Login from "./Pages/Login";
+import SignUp from "./Pages/signup";
 
 const RoadmapGenerator = () => {
   const [keyword, setKeyword] = useState("");
@@ -92,6 +94,8 @@ const App = () => {
     <div>
       {!showRoadmapGenerator ? (
         <>
+          <Login />
+          <SignUp />
           <Home onGetStarted={() => setShowRoadmapGenerator(true)} />
           <FeatureSection />
           <FeatureSection2 />
