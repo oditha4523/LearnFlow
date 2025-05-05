@@ -18,7 +18,6 @@ const LayoutFlow = () => {
   const { fitView } = useReactFlow();
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const [keyword, setKeyword] = useState('');
 
   const fetchRoadmap = async (keyword) => {
     try {
@@ -32,8 +31,6 @@ const LayoutFlow = () => {
 
       const result = await response.json();
 
-      // The result is a string like: "const nodes = [...]; const edges = [...];"
-      // We'll evaluate it safely by extracting the objects
       const nodesMatch = result.match(/nodes\s*=\s*(\[[\s\S]*?\]);/);
       const edgesMatch = result.match(/edges\s*=\s*(\[[\s\S]*?\]);/);
 
@@ -51,27 +48,8 @@ const LayoutFlow = () => {
     }
   };
 
-
   return (
-    <div style={{ width: '70%', height: '50vh', alignItems:'center',position:'relative' }}>
-      <div style={{ padding: '10px', background: '#f0f0f0' }}>
-        <input
-          type="text"
-          placeholder="Enter keyword..."
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              fetchRoadmap(e.target.value);
-            }
-          }}
-          style={{ margin: '10px', padding: '5px', width: '250px' }}
-        />
-        <button
-          onClick={() => fetchRoadmap(inputRef.current.value)}
-          style={{ padding: '6px 12px', cursor: 'pointer' }}
-        >
-          Generate
-        </button>
-      </div>
+    <div style={{ width: '70%', height: '50vh', alignItems: 'center', position: 'relative' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -84,11 +62,26 @@ const LayoutFlow = () => {
 };
 
 const App = () => {
+  const [showFlow, setShowFlow] = useState(false);
+
+  const handleGetStarted = () => {
+    setShowFlow(true);
+  };
+
   return (
     <div>
-      <ReactFlowProvider>
-        <LayoutFlow />
-      </ReactFlowProvider>
+      {!showFlow ? (
+        <>
+          <Home onGetStarted={handleGetStarted} />
+          <FeatureSection />
+          <FeatureSection2 />
+          <Footer />
+        </>
+      ) : (
+        <ReactFlowProvider>
+          <LayoutFlow />
+        </ReactFlowProvider>
+      )}
     </div>
   );
 };
