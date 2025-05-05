@@ -6,6 +6,7 @@ from flask_cors import CORS
 import json
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import users_collection
+import re
 
 load_dotenv()
 
@@ -13,17 +14,31 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+EMAIL_REGEX = r"[^@]+@[^@]+\.[^@]+"
+
 @app.route("/signup", methods=["POST"])
 def signup():
     data = request.get_json()
     username = data.get("username")
+    email = data.get("email")
     password = data.get("password")
 
-    if users_collection.find_one({"username": username}):
-        return jsonify({"message": "User already exists"}), 400
+    if not username or not email or not password:
+        return jsonify({"message": "All fields are required"}), 400
+
+    if not re.match(EMAIL_REGEX, email):
+        return jsonify({"message": "Invalid email format"}), 400
+
+    if users_collection.find_one({"$or": [{"username": username}, {"email": email}]}):
+        return jsonify({"message": "Username or email already exists"}), 400
 
     hashed_pw = generate_password_hash(password)
-    users_collection.insert_one({"username": username, "password": hashed_pw})
+    users_collection.insert_one({
+        "username": username,
+        "email": email,
+        "password": hashed_pw
+    })
+
     return jsonify({"message": "User created"}), 201
 
 @app.route("/login", methods=["POST"])

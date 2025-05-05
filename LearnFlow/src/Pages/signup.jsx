@@ -21,11 +21,19 @@ function Signup() {
         type="text"
         placeholder="Username"
         onChange={(e) => setForm({ ...form, username: e.target.value })}
+        required
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        onChange={(e) => setForm({ ...form, email: e.target.value })}
+        required
       />
       <input
         type="password"
         placeholder="Password"
         onChange={(e) => setForm({ ...form, password: e.target.value })}
+        required
       />
       <button type="submit">Sign Up</button>
     </form>
