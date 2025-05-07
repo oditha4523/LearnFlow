@@ -1,7 +1,8 @@
-import React from 'react';
-import image from '../assets/bgggg.png';
-import CardContainer from '../components/CardContainer';
-import IconSlider from '../components/IconSlider';
+import React from "react";
+import { useNavigate, Link } from "react-router-dom";
+import image from "../assets/bgggg.png";
+import CardContainer from "../components/CardContainer";
+import IconSlider from "../components/IconSlider";
 
 const Home = ({ onGetStarted }) => {
   return (
@@ -17,8 +18,18 @@ const Home = ({ onGetStarted }) => {
         zIndex: 0,
       }}
     >
-      <div style={{ color: "white", textAlign: "left", paddingTop: "15%", paddingLeft: "10%" }}>
-        <h1 className='text-container' style={{ fontSize: "3rem", fontWeight: "bold" }}>
+      <div
+        style={{
+          color: "white",
+          textAlign: "left",
+          paddingTop: "15%",
+          paddingLeft: "10%",
+        }}
+      >
+        <h1
+          className="text-container"
+          style={{ fontSize: "3rem", fontWeight: "bold" }}
+        >
           Start Your Learning Path
           <br />
           With Our Services

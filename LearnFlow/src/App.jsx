@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ReactFlow, { MiniMap, Controls, Background } from "reactflow";
 import "reactflow/dist/style.css";
 import FeatureSection2 from "./Pages/FeatureSection2";
@@ -92,10 +93,19 @@ const App = () => {
 
   return (
     <div>
+      <Router>
+        <div>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/home" element={<Home />} />
+          </Routes>
+        </div>
+      </Router>
+
       {!showRoadmapGenerator ? (
         <>
-          <Login />
-          <SignUp />
           <Home onGetStarted={() => setShowRoadmapGenerator(true)} />
           <FeatureSection />
           <FeatureSection2 />
