@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ReactFlow, { MiniMap, Controls, Background } from "reactflow";
-
-import ReactFlow, { MiniMap, Controls, Background, ReactFlowProvider, useReactFlow, useNodesState, useEdgesState } from "reactflow";
+import ReactFlow, { 
+  MiniMap, 
+  Controls, 
+  Background, 
+  ReactFlowProvider, 
+  useReactFlow, 
+  useNodesState, 
+  useEdgesState 
+} from "reactflow";
 
 import "reactflow/dist/style.css";
 import FeatureSection2 from "./Pages/FeatureSection2";
