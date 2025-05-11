@@ -4,6 +4,7 @@ import image from "../assets/bgggg.png";
 import CardContainer from "../components/CardContainer";
 import IconSlider from "../components/IconSlider";
 
+
 const Home = ({ onGetStarted }) => {
   return (
     <div
@@ -12,6 +13,8 @@ const Home = ({ onGetStarted }) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        margin: "0",
+        padding: "0",
         width: "100vw",
         height: "100vh",
         position: "relative", // Changed from fixed to relative
@@ -32,7 +35,7 @@ const Home = ({ onGetStarted }) => {
         >
           Start Your Learning Path
           <br />
-          With Our Services
+          With Our Services kjdshkfjhsdf
         </h1>
         <p style={{ fontSize: "1.2rem", margin: "20px 0" }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />
@@ -57,6 +60,7 @@ const Home = ({ onGetStarted }) => {
       </div>
       <CardContainer />
       <IconSlider />
+    
     </div>
   );
 };
