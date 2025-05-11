@@ -11,6 +11,8 @@ const Home = ({ onGetStarted }) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        margin: "0",
+        padding: "0",
         width: "100vw",
         height: "100vh",
         position: "relative", // Changed from fixed to relative

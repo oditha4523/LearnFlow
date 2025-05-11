@@ -30,6 +30,22 @@ def generate_roadmap():
     prompt = f"""
       Generate a learning roadmap for {keyword} in JavaScript object format, compatible with React Flow.
 
+      Follow these layout guidelines to create a clear tree structure with no overlapping:
+      1. Use a hierarchical tree layout with diagonal branches
+      2. Horizontal spacing between sibling nodes:
+         - First level: 800 units between branches
+         - Second level: 400 units between branches
+         - Third level: 200 units between branches
+      3. Vertical spacing (y) should be at least 200 units between levels
+      4. Start the first node at (800, 0)
+      5. Position child nodes diagonally below their parent:
+         - First child: offset 300 units left from parent's x position
+         - Second child: offset 150 units left from parent's x position
+         - Third child: same x as parent
+         - Fourth child: offset 150 units right from parent's x position
+         - Fifth child: offset 300 units right from parent's x position
+      6. For deeper levels, maintain the same offset pattern but reduce spacing by half
+
       Ensure the output includes two constants: `nodes` and `edges`, structured exactly like this:
 
       nodes = [
@@ -37,37 +53,47 @@ def generate_roadmap():
           id: '1',
           type: 'input',
           data: {{ label: 'input' }},
-          position: {{ x: 0, y: 0 }},
+          position: {{ x: 800, y: 0 }},
         }},
         {{
           id: '2',
           data: {{ label: 'node 2' }},
-          position: {{ x: 0, y: 100 }},
+          position: {{ x: 400, y: 200 }},
         }},
         {{
           id: '2a',
           data: {{ label: 'node 2a' }},
-          position: {{ x: 0, y: 200 }},
+          position: {{ x: 200, y: 400 }},
         }},
         {{
           id: '2b',
           data: {{ label: 'node 2b' }},
-          position: {{ x: 0, y: 300 }},
+          position: {{ x: 400, y: 400 }},
         }},
         {{
           id: '2c',
           data: {{ label: 'node 2c' }},
-          position: {{ x: 0, y: 400 }},
-        }},
-        {{
-          id: '2d',
-          data: {{ label: 'node 2d' }},
-          position: {{ x: 0, y: 500 }},
+          position: {{ x: 600, y: 400 }},
         }},
         {{
           id: '3',
           data: {{ label: 'node 3' }},
-          position: {{ x: 200, y: 100 }},
+          position: {{ x: 1200, y: 200 }},
+        }},
+        {{
+          id: '3a',
+          data: {{ label: 'node 3a' }},
+          position: {{ x: 1000, y: 400 }},
+        }},
+        {{
+          id: '3b',
+          data: {{ label: 'node 3b' }},
+          position: {{ x: 1200, y: 400 }},
+        }},
+        {{
+          id: '3c',
+          data: {{ label: 'node 3c' }},
+          position: {{ x: 1400, y: 400 }},
         }},
       ];
 
@@ -77,7 +103,9 @@ def generate_roadmap():
         {{ id: 'e22a', source: '2', target: '2a', animated: true }},
         {{ id: 'e22b', source: '2', target: '2b', animated: true }},
         {{ id: 'e22c', source: '2', target: '2c', animated: true }},
-        {{ id: 'e2c2d', source: '2c', target: '2d', animated: true }},
+        {{ id: 'e33a', source: '3', target: '3a', animated: true }},
+        {{ id: 'e33b', source: '3', target: '3b', animated: true }},
+        {{ id: 'e33c', source: '3', target: '3c', animated: true }},
       ];
 
       Only output the two constants (`nodes`, `edges`) in valid JavaScript object format. Do not include any extra explanation or text.
