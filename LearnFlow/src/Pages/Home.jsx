@@ -3,6 +3,7 @@ import image from '../assets/bgggg.png';
 import CardContainer from '../components/CardContainer';
 import IconSlider from '../components/IconSlider';
 
+
 const Home = ({ onGetStarted }) => {
   return (
     <div
@@ -11,6 +12,8 @@ const Home = ({ onGetStarted }) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        margin: "0",
+        padding: "0",
         width: "100vw",
         height: "100vh",
         position: "relative", // Changed from fixed to relative
@@ -46,6 +49,7 @@ const Home = ({ onGetStarted }) => {
       </div>
       <CardContainer />
       <IconSlider />
+    
     </div>
   );
 };
