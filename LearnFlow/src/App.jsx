@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import axios from "axios";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ReactFlow, { 
+  MiniMap, 
+  Controls, 
+  Background, 
+  ReactFlowProvider, 
+  useReactFlow, 
+  useNodesState, 
+  useEdgesState 
+} from "reactflow";
 
+import "reactflow/dist/style.css";
+import FeatureSection2 from "./Pages/FeatureSection2";
+import Home from "./Pages/Home";
+import FeatureSection from "./Pages/FeatureSection";
+import Footer from "./Pages/Footer";
+
+import Login from "./Pages/Login";
+import SignUp from "./Pages/signup";
+
+import LayoutFlow from "./components/LayoutFlow";
+
+
+import { initialNodes, initialEdges } from './components/nodes-edges';
+import '@xyflow/react/dist/style.css';
+
+
+
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+<Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/home"
+          element={
+            <div className="app-container">
+              <Home />
+              <FeatureSection />
+              <FeatureSection2 />
+              <div className="flow-container" style={{ margin: '2rem auto' }}>
+                <ReactFlowProvider>
+                  <LayoutFlow />
+                </ReactFlowProvider>
+              </div>
+              <Footer />
+            </div>
+          }
+        />
+        {/* Optionally redirect "/" to "/login" */}
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;
