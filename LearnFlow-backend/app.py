@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request
 from dotenv import load_dotenv
 from flask_cors import CORS
 import json
+import re
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -101,6 +102,7 @@ def generate_roadmap():
     prompt = f"""
       Generate a learning roadmap for {keyword} in JavaScript object format, compatible with React Flow.
 
+
       Follow these layout guidelines to create a clear tree structure with no overlapping:
       1. Use a hierarchical tree layout with diagonal branches
       2. Horizontal spacing between sibling nodes:
@@ -117,33 +119,29 @@ def generate_roadmap():
          - Fifth child: offset 300 units right from parent's x position
       6. For deeper levels, maintain the same offset pattern but reduce spacing by half
 
-      Ensure the output includes two constants: `nodes` and `edges`, structured exactly like this:
 
-      nodes = [
-        {{
-          id: '1',
-          type: 'input',
-          data: {{ label: 'input' }},
+
+
           position: {{ x: 800, y: 0 }},
-        }},
-        {{
-          id: '2',
-          data: {{ label: 'node 2' }},
+
+          position: {{ x: 0, y: 0 }},
+
+
           position: {{ x: 400, y: 200 }},
-        }},
-        {{
-          id: '2a',
-          data: {{ label: 'node 2a' }},
+
+          position: {{ x: 0, y: 100 }},
+
+
           position: {{ x: 200, y: 400 }},
-        }},
-        {{
-          id: '2b',
-          data: {{ label: 'node 2b' }},
+
+          position: {{ x: 0, y: 200 }},
+
+
           position: {{ x: 400, y: 400 }},
-        }},
-        {{
-          id: '2c',
-          data: {{ label: 'node 2c' }},
+
+          position: {{ x: 0, y: 300 }},
+
+
           position: {{ x: 600, y: 400 }},
         }},
         {{
@@ -165,18 +163,26 @@ def generate_roadmap():
           id: '3c',
           data: {{ label: 'node 3c' }},
           position: {{ x: 1400, y: 400 }},
-        }},
-      ];
 
-      edges = [
-        {{ id: 'e12', source: '1', target: '2', animated: true }},
-        {{ id: 'e13', source: '1', target: '3', animated: true }},
-        {{ id: 'e22a', source: '2', target: '2a', animated: true }},
-        {{ id: 'e22b', source: '2', target: '2b', animated: true }},
-        {{ id: 'e22c', source: '2', target: '2c', animated: true }},
+          position: {{ x: 0, y: 400 }},
+        }},
+        {{
+          id: '2d',
+          data: {{ label: 'node 2d' }},
+          position: {{ x: 0, y: 500 }},
+        }},
+        {{
+          id: '3',
+          data: {{ label: 'node 3' }},
+          position: {{ x: 200, y: 100 }},
+
+
         {{ id: 'e33a', source: '3', target: '3a', animated: true }},
         {{ id: 'e33b', source: '3', target: '3b', animated: true }},
         {{ id: 'e33c', source: '3', target: '3c', animated: true }},
+
+        {{ id: 'e2c2d', source: '2c', target: '2d', animated: true }},
+
       ];
 
       Only output the two constants (`nodes`, `edges`) in valid JavaScript object format. Do not include any extra explanation or text.

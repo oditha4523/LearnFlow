@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ReactFlow, { 
   MiniMap, 
@@ -12,11 +13,13 @@ import ReactFlow, {
   useEdgesState 
 } from "reactflow";
 
+
 import "reactflow/dist/style.css";
 import FeatureSection2 from "./Pages/FeatureSection2";
 import Home from "./Pages/Home";
 import FeatureSection from "./Pages/FeatureSection";
 import Footer from "./Pages/Footer";
+
 
 import Login from "./Pages/Login";
 import SignUp from "./Pages/signup";
@@ -55,6 +58,8 @@ const App = () => {
         <Route path="/" element={<Login />} />
       </Routes>
     </Router>
+
+
   );
 };
 
