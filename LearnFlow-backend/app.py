@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request
 from dotenv import load_dotenv
 from flask_cors import CORS
 import json
+import re
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -158,7 +159,6 @@ def generate_roadmap():
       6. For deeper levels, maintain the same offset pattern but reduce spacing by half
 
       Ensure the output includes two constants: `nodes` and `edges`, structured exactly like this:
-
       nodes = [
         {{
           id: '1',
@@ -219,6 +219,7 @@ def generate_roadmap():
         {{ id: 'e33c', source: '3', target: '3c', animated: true }},
       ];
 
+
       Only output the two constants (`nodes`, `edges`) in valid JavaScript object format. Do not include any extra explanation or text.
       """
 
@@ -226,7 +227,7 @@ def generate_roadmap():
         model = genai.GenerativeModel('gemini-1.5-flash')
         response=model.generate_content(prompt)
         print("Response:", response)
-        print("🔍 Retrieved context:\n", retrieved_context)
+        print("Retrieved context:\n", retrieved_context)
         roadmap_data = response.text
         return jsonify(roadmap_data)
     
