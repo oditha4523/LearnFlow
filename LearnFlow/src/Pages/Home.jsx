@@ -1,7 +1,8 @@
-import React from 'react';
-import image from '../assets/bgggg.png';
-import CardContainer from '../components/CardContainer';
-import IconSlider from '../components/IconSlider';
+import React from "react";
+import { useNavigate, Link } from "react-router-dom";
+import image from "../assets/bgggg.png";
+import CardContainer from "../components/CardContainer";
+import IconSlider from "../components/IconSlider";
 
 const Home = ({ onGetStarted }) => {
   return (
@@ -11,9 +12,15 @@ const Home = ({ onGetStarted }) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        width: "100%",
-        minHeight: "100vh",
-        position: "relative",
+
+        margin: "0",
+        padding: "0",
+        width: "100vw",
+        height: "100vh",
+        position: "relative", // Changed from fixed to relative
+
+        
+
         zIndex: 0,
       }}
     >
@@ -23,16 +30,17 @@ const Home = ({ onGetStarted }) => {
           textAlign: "left",
           paddingTop: "15%",
           paddingLeft: "10%",
-          paddingRight: "10%",
+
+  
         }}
       >
         <h1
           className="text-container"
-          style={{
-            fontSize: "3rem",
-            fontWeight: "bold",
-            lineHeight: "1.2",
-          }}
+
+          style={{ fontSize: "3rem", fontWeight: "bold" }}
+
+          
+
         >
           Start Your Learning Path
           <br />
