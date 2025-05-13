@@ -1,30 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ReactFlow, { 
-  MiniMap, 
-  Controls, 
-  Background, 
-  ReactFlowProvider, 
-  useReactFlow, 
-  useNodesState, 
-  useEdgesState 
-} from "reactflow";
-
+import {ReactFlowProvider} from "reactflow";
 import "reactflow/dist/style.css";
 import FeatureSection2 from "./Pages/FeatureSection2";
 import Home from "./Pages/Home";
 import FeatureSection from "./Pages/FeatureSection";
 import Footer from "./Pages/Footer";
-
 import Login from "./Pages/Login";
 import SignUp from "./Pages/signup";
-
 import LayoutFlow from "./components/LayoutFlow";
-
-
-import { initialNodes, initialEdges } from './components/nodes-edges';
 import '@xyflow/react/dist/style.css';
 
 

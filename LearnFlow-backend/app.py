@@ -11,8 +11,14 @@ from models import users_collection
 import re
 import datetime
 
+from langchain_community.document_loaders import UnstructuredPDFLoader
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain.text_splitter import CharacterTextSplitter
+
 
 load_dotenv()
+
 
 
 app = Flask(__name__)
@@ -89,6 +95,33 @@ genai.configure(api_key=os.environ['GEMINI_API_KEY'])
 
 model = genai.GenerativeModel('gemini-1.5-flash')
 
+
+# ================API integration and RAG system=========================
+
+def load_pdfs_from_folder(folder_path="data"):
+    docs = []
+    for filename in os.listdir(folder_path):
+        if filename.endswith(".pdf"):
+            loader = UnstructuredPDFLoader(os.path.join(folder_path, filename))
+            docs.extend(loader.load())
+    return docs
+
+def load_vectorstore_from_pdfs():
+    print("Loading PDFs for vector store...")
+    docs = load_pdfs_from_folder("data")
+
+    splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+    split_docs = splitter.split_documents(docs)
+
+    embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    vectorstore = Chroma.from_documents(split_docs, embedding=embedding)
+
+    return vectorstore
+
+# Create the vectorstore at app startup
+vectorstore = load_vectorstore_from_pdfs()
+
+
 @app.route('/generate_roadmap', methods=['POST'])
 def generate_roadmap():
     data = request.get_json()
@@ -97,9 +130,16 @@ def generate_roadmap():
 
     if not keyword:
         return jsonify({"error": "Keyword is required"}), 400
+    
+    #  Retrieve context using RAG
+    relevant_docs = vectorstore.similarity_search(keyword, k=4)
+    retrieved_context = "\n".join([doc.page_content for doc in relevant_docs])
 
     prompt = f"""
       Generate a learning roadmap for {keyword} in JavaScript object format, compatible with React Flow.
+
+      Context:
+        {retrieved_context}
 
       Follow these layout guidelines to create a clear tree structure with no overlapping:
       1. Use a hierarchical tree layout with diagonal branches
@@ -186,14 +226,20 @@ def generate_roadmap():
         model = genai.GenerativeModel('gemini-1.5-flash')
         response=model.generate_content(prompt)
         print("Response:", response)
+        print("🔍 Retrieved context:\n", retrieved_context)
         roadmap_data = response.text
         return jsonify(roadmap_data)
     
     except Exception as e:
         return jsonify({"error": "Failed to generate roadmap", "details": str(e)})
 
-
- 
-
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+# ===================dependencies for RAG=========================
+
+# pip install langchain unstructured pdfminer.six chromadb sentence-transformers
+# pip install onnxruntime==1.22.0
+# pip install pi-heif
+# pip install "unstructured[pdf]"
