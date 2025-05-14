@@ -1,8 +1,7 @@
-import React from 'react';
-import image from '../assets/bgggg.png';
-import CardContainer from '../components/CardContainer';
-import IconSlider from '../components/IconSlider';
-
+import React from "react";
+import image from "../assets/bgggg.png";
+import CardContainer from "../components/CardContainer";
+import IconSlider from "../components/IconSlider";
 
 const Home = ({ onGetStarted }) => {
   return (
@@ -12,21 +11,47 @@ const Home = ({ onGetStarted }) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+
         margin: "0",
         padding: "0",
         width: "100vw",
         height: "100vh",
         position: "relative", // Changed from fixed to relative
+
+        
+
         zIndex: 0,
       }}
     >
-      <div style={{ color: "white", textAlign: "left", paddingTop: "15%", paddingLeft: "10%" }}>
-        <h1 className='text-container' style={{ fontSize: "3rem", fontWeight: "bold" }}>
+      <div
+        style={{
+          color: "white",
+          textAlign: "left",
+          paddingTop: "15%",
+          paddingLeft: "10%",
+
+  
+        }}
+      >
+        <h1
+          className="text-container"
+
+          style={{ fontSize: "3rem", fontWeight: "bold" }}
+
+          
+
+        >
           Start Your Learning Path
           <br />
-          With Our Services kjdshkfjhsdf
+          With Our Services
         </h1>
-        <p style={{ fontSize: "1.2rem", margin: "20px 0" }}>
+        <p
+          style={{
+            fontSize: "1.2rem",
+            margin: "20px 0",
+            lineHeight: "1.5",
+          }}
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br />
           Sed do eiusmod tempor incididunt ut labore et dolore.
         </p>
@@ -49,7 +74,6 @@ const Home = ({ onGetStarted }) => {
       </div>
       <CardContainer />
       <IconSlider />
-    
     </div>
   );
 };
