@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
 import image from "../assets/bgggg.png";
 import CardContainer from "../components/CardContainer";
 import IconSlider from "../components/IconSlider";
