@@ -12,7 +12,7 @@ from models import users_collection
 import re
 import datetime
 
-from langchain_community.document_loaders import UnstructuredPDFLoader
+from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import CharacterTextSplitter
@@ -103,7 +103,7 @@ def load_pdfs_from_folder(folder_path="data"):
     docs = []
     for filename in os.listdir(folder_path):
         if filename.endswith(".pdf"):
-            loader = UnstructuredPDFLoader(os.path.join(folder_path, filename))
+            loader = PyMuPDFLoader(os.path.join(folder_path, filename))
             docs.extend(loader.load())
     return docs
 

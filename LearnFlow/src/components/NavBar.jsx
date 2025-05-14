@@ -28,6 +28,13 @@ const Navbar = () => (
       LearnFlow
     </div>
     
+    <div>
+      <a href="#home" style={navLinkStyle}>Home</a>
+      <a href="#services" style={navLinkStyle}>Services</a>
+      <a href="#about" style={navLinkStyle}>About</a>
+      <a href="#contact" style={navLinkStyle}>Contact</a>
+    </div>
+
   </nav>
 );
 
