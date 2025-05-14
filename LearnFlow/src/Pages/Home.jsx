@@ -3,6 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import image from "../assets/bgggg.png";
 import CardContainer from "../components/CardContainer";
 import IconSlider from "../components/IconSlider";
+import NavBar from "../components/NavBar";
+
+
 
 
 const Home = ({ onGetStarted }) => {
@@ -58,6 +61,7 @@ const Home = ({ onGetStarted }) => {
           GET STARTED
         </button>
       </div>
+      <NavBar/>
       <CardContainer />
       <IconSlider />
     
