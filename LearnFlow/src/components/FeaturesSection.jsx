@@ -6,18 +6,18 @@ const FeaturesSection = ({ onBecomePartner }) => {
   const features = [
     {
       icon: "🔍", 
-      title: "Find out what you need",
-      description: "We present you a proposal and discuss nitty-gritty like"
+      title: "Discover what you need",
+      description: "Just enter a keyword ,our AI and RAG system do the rest. From basics to advanced, you'll get a structured, trustworthy path."
     },
     {
       icon: "⚙️",
-      title: "Work out the details", 
-      description: "Communication protocols apart from engagement models"
+      title: "Visualize Your Journey", 
+      description: "Interactive roadmap nodes offer key concepts, descriptions, and learning resources. Click to dive deeper."
     },
     {
       icon: "🚀",
-      title: "We get to work fast",
-      description: "Protocols apart from engage models, pricing billing"
+      title: "Start learning fast",
+      description: "Get started immediately. No fluff just guided, intelligent learning that evolves with your goals."
     }
   ]
 
@@ -36,13 +36,13 @@ const FeaturesSection = ({ onBecomePartner }) => {
           variants={textVariant(0.2)}
           className="text-3xl font-bold mb-4"
         >
-          How can we help your business?
+          How Can We Guide Your Learning?
         </motion.h2>
         <motion.p 
           variants={fadeIn('up', 0.4)}
           className="text-gray-600"
         >
-          When you resell besnik, you build trust and increase
+          Discover how our roadmap generator transforms self-learning in programming.
         </motion.p>
       </motion.div>
       
@@ -99,7 +99,7 @@ const FeaturesSection = ({ onBecomePartner }) => {
           className="bg-blue-600 text-white cursor-pointer px-8 py-3 rounded-full font-medium hover:bg-blue-700 transition-colors relative"
           onClick={onBecomePartner}
         >
-          Become a Partner
+          GET STARTED
           <div className="absolute -z-10 w-full h-full rounded-full bg-blue-600/30 blur-xl top-0 left-0"></div>
         </motion.button>
       </motion.div>

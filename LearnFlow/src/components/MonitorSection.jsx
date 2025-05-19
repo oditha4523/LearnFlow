@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
 import 'swiper/css';
 import 'swiper/css/navigation';
-import monitorCardBg from '../assets/hero.jpg';
+import monitorCardBg1 from '../assets/astro1.png';
 
 const MonitorSection = () => {
   return (
@@ -15,10 +15,14 @@ const MonitorSection = () => {
     >
       <div className="flex flex-col md:flex-row items-center gap-12">
         {/* Left side - Content */}
+      
         <motion.div 
           variants={fadeIn('right', 0.3)}
-          className="w-full md:w-1/2"
+          className="w-full md:w-1/2 relative"
         >
+        
+        <div className="absolute -top-120 -left-80 w-350 h-350 rounded-full bg-[radial-gradient(circle,_#e3d4ff_0%,_transparent_50%)] -z-10"></div>
+        <div className="absolute -top-60 left-60 w-350 h-350 rounded-full bg-[radial-gradient(circle,_#FF69B4_-70%,_transparent_40%)] -z-10"></div>
           <motion.span 
             variants={fadeIn('up', 0.4)}
             className="text-emerald-500 font-semibold"
@@ -71,7 +75,7 @@ const MonitorSection = () => {
           >
             <motion.img 
               variants={fadeIn('up', 0.5)}
-              src={monitorCardBg}
+              src={monitorCardBg1}
               alt="Dashboard statistics"
               className="w-full h-auto rounded-lg"
             />

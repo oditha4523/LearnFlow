@@ -1,4 +1,4 @@
-import scheduleImage from '../assets/hero.jpg';
+import scheduleImage from '../assets/astro3.png';
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
 
@@ -27,8 +27,10 @@ const ScheduleSection = () => {
         {/* Right side - Content */}
         <motion.div 
           variants={fadeIn('left', 0.3)}
-          className="w-full md:w-1/2"
+          className="w-full md:w-1/2 relative"
         >
+          <div className="absolute -top-630 -left-650 w-1550 h-1350 rounded-full bg-[radial-gradient(circle,_#F97316_-20%,_transparent_9%)] -z-10"></div>
+          
           <motion.span 
             variants={fadeIn('up', 0.4)}
             className="text-orange-500 font-semibold"

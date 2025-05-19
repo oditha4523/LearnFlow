@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
-import heroImage from '../assets/hero4.jpg'
+import heroImage from '../assets/astro2.png'
 
 const Hero = () => {
   return (
@@ -22,12 +22,12 @@ const Hero = () => {
           whileInView="show"
           className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
         >
-          We boost the growth for{' '}
+          Empower Your{' '}
           <span className="text-blue-600 relative inline-block">
-            Startup to Fortune 500
+          Programming Journey with
             <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-200/60"></span>
           </span>{' '}
-          Companies
+          AI-Powered Roadmaps
           <span className="inline-block ml-2 animate-pulse">⏰</span>
         </motion.h1>
 
@@ -46,15 +46,6 @@ const Hero = () => {
           whileInView="show"
           className="flex gap-3 max-w-md"
         >
-          {/* Email Form */}
-          {/* <input
-            type="email"
-            placeholder="Email address"
-            className="flex-1 px-6 py-4 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all text-gray-600"
-          />
-          <button className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 cursor-pointer transition-all hover:shadow-lg hover:shadow-blue-100 active:scale-95">
-            →
-          </button> */}
         </motion.div>
       </div>
 

@@ -9,6 +9,23 @@ const getLayoutedElements = (nodes, edges) => {
   return { nodes, edges };
 };
 
+const nodeStyles = {
+  parent: {
+    background: '#cc0000', // Red color for parent nodes
+    color: 'white',
+    border: '1px solid #cc0000',
+    borderRadius: '5px',
+    padding: '10px',
+  },
+  child: {
+    background: '#ffd700', // Yellow color for child nodes
+    color: 'black',
+    border: '1px solid #cc9900',
+    borderRadius: '5px',
+    padding: '10px',
+  }
+};
+
 const LayoutFlow = () => {
   // State management
   const { fitView } = useReactFlow();
@@ -38,7 +55,18 @@ const LayoutFlow = () => {
       if (nodesMatch && edgesMatch) {
         const newNodes = eval(nodesMatch[1]);
         const newEdges = eval(edgesMatch[1]);
-        setNodes(newNodes);
+
+          // Add styles to nodes based on their type
+          const styledNodes = newNodes.map(node => {
+            // Check if node is a parent (has outgoing edges)
+            const isParent = newEdges.some(edge => edge.source === node.id);
+            return {
+              ...node,
+              style: isParent ? nodeStyles.parent : nodeStyles.child,
+            };
+          });
+
+        setNodes(styledNodes);
         setEdges(newEdges);
         fitView();
       } else {

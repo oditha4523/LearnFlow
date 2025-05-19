@@ -80,14 +80,6 @@ const ServicesSection = () => {
             <span className="text-gray-600">Development bring</span>
           </motion.div>
         </motion.div>
-        <motion.button 
-          variants={fadeIn('up', 0.9)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="mt-8 bg-indigo-600 text-white px-8 py-3 cursor-pointer rounded-full hover:bg-indigo-700 transition-colors"
-        >
-          Get started
-        </motion.button>
       </motion.div>
 
       {/* Services Grid */}
