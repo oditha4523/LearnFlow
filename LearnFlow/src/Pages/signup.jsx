@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "./LoginSignup.css";
+import { FaUser, FaLock,} from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 function SignUp() {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
@@ -36,8 +38,16 @@ function SignUp() {
 
   return (
     <div className="auth-container">
+      <div className="auth-heading">
+        <h3>LearnFlow</h3>
+        <h1>AI-Generated Learning Path</h1>
+        <h2>for Programming Languages</h2>
+      </div>
+
       <form onSubmit={handleSubmit} className="auth-form">
         <h2 className="form-title">Sign Up</h2>
+        <div className="input-container">
+          <FaUser className="icon" /> 
         <input
           type="text"
           placeholder="Username"
@@ -45,6 +55,9 @@ function SignUp() {
           required
           onChange={(e) => setForm({ ...form, username: e.target.value })}
         />
+        </div>
+        <div className="input-container">
+          <MdEmail className="icon" />
         <input
           type="email"
           placeholder="Email"
@@ -52,6 +65,9 @@ function SignUp() {
           required
           onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
+        </div>
+        <div className="input-container">
+          <FaLock className="icon" />
         <input
           type="password"
           placeholder="Password"
@@ -62,6 +78,7 @@ function SignUp() {
             setError(checkPasswordStrength(e.target.value));
           }}
         />
+        </div>
         {error && <p className="error-message">{error}</p>}
         <button type="submit" className="auth-btn">
           Sign Up
