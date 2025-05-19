@@ -13,29 +13,30 @@ import "@xyflow/react/dist/style.css";
 
 const App = () => {
   return (
-    <div>
-      <Router>
-        <div>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-          </Routes>
-        </div>
-      </Router>
-
-      {!showRoadmapGenerator ? (
-        <>
-          <Home onGetStarted={() => setShowRoadmapGenerator(true)} />
-          <FeatureSection />
-          <FeatureSection2 />
-        </>
-      ) : (
-        <RoadmapGenerator />
-      )}
-      {/* Footer is always displayed at the bottom */}
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/home"
+          element={
+            <div className="app-container">
+              <Home />
+              <FeatureSection />
+              <FeatureSection2 />
+              <div className="flow-container" style={{ margin: "2rem auto" }}>
+                <ReactFlowProvider>
+                  <LayoutFlow />
+                </ReactFlowProvider>
+              </div>
+              <Footer />
+            </div>
+          }
+        />
+        {/* Optionally redirect "/" to "/login" */}
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </Router>
   );
 };
 
