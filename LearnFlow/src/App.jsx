@@ -33,10 +33,10 @@ function App() {
         <FeaturesSection onBecomePartner={handleBecomePartner} />
         <ScheduleSection />
         <MonitorSection />
-        <PricingSection />
+        {/* <PricingSection /> */}
         <ServicesSection />
         <TestimonialsSection />
-        <NewsletterSection />
+        {/* <NewsletterSection /> */}
         {showLayoutFlow && (
           <div className="flow-container" style={{ margin: '2rem auto' }}>
             <ReactFlowProvider>

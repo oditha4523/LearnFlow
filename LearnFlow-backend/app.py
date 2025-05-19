@@ -13,10 +13,11 @@ import re
 import datetime
 
 from langchain_community.document_loaders import UnstructuredPDFLoader
-from langchain_community.embeddings import HuggingFaceEmbeddings
+# from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import PyMuPDFLoader
+from langchain_huggingface import HuggingFaceEmbeddings
 
 
 load_dotenv()
@@ -139,12 +140,12 @@ def generate_roadmap():
 
     prompt = f"""
       Generate a learning roadmap for {keyword} in JavaScript object format, compatible with React Flow.
-
+      
       Context:
         {retrieved_context}
 
       Follow these layout guidelines to create a clear tree structure with no overlapping:
-      1. Use a hierarchical tree layout with diagonal branches
+      1. Use a hierarchical linear layout with diagonal branches
       2. Horizontal spacing between sibling nodes:
          - First level: 800 units between branches
          - Second level: 400 units between branches
@@ -175,7 +176,7 @@ def generate_roadmap():
         {{
           id: '2a',
           data: {{ label: 'node 2a' }},
-          position: {{ x: 200, y: 400 }},
+          position: {{ x: 200, y: 400 }},  
         }},
         {{
           id: '2b',
@@ -203,21 +204,21 @@ def generate_roadmap():
           position: {{ x: 1200, y: 400 }},
         }},
         {{
-          id: '3c',
-          data: {{ label: 'node 3c' }},
+          id: '4',
+          data: {{ label: 'node 4' }},
           position: {{ x: 1400, y: 400 }},
         }},
       ];
 
       edges = [
         {{ id: 'e12', source: '1', target: '2', animated: true }},
-        {{ id: 'e13', source: '1', target: '3', animated: true }},
+        {{ id: 'e13', source: '2', target: '3', animated: true }},
         {{ id: 'e22a', source: '2', target: '2a', animated: true }},
         {{ id: 'e22b', source: '2', target: '2b', animated: true }},
         {{ id: 'e22c', source: '2', target: '2c', animated: true }},
         {{ id: 'e33a', source: '3', target: '3a', animated: true }},
         {{ id: 'e33b', source: '3', target: '3b', animated: true }},
-        {{ id: 'e33c', source: '3', target: '3c', animated: true }},
+        {{ id: 'e33c', source: '3', target: '4', animated: true }},
       ];
 
 
