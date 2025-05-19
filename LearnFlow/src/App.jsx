@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -33,10 +34,10 @@ function App() {
         <FeaturesSection onBecomePartner={handleBecomePartner} />
         <ScheduleSection />
         <MonitorSection />
-        <PricingSection />
+        {/* <PricingSection /> */}
         <ServicesSection />
         <TestimonialsSection />
-        <NewsletterSection />
+        {/* <NewsletterSection /> */}
         {showLayoutFlow && (
           <div className="flow-container" style={{ margin: '2rem auto' }}>
             <ReactFlowProvider>
@@ -47,6 +48,7 @@ function App() {
         <Footer />
       </div>
     </main>
+
   );
 }
 
