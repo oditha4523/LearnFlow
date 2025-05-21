@@ -92,12 +92,15 @@ const LayoutFlow = () => {
   };
 
   return (
+    
     // Main Layout Container
     <div className="layout-container">
       {/* Flow Diagram Section */}
       <div className="flow-container">
         {/* Search Bar */}
-        <div className="search-container">
+        <div className="search-container relative">
+          <div className="absolute inset-0 w-full h-full rounded-xl pointer-events-none bg-[radial-gradient(circle_at_20%_50%,_#e3d4ff_0%,_transparent_70%)] opacity-40 -z-10"></div>
+          <div className="absolute inset-0 w-full h-full rounded-xl pointer-events-none bg-[radial-gradient(circle_at_80%_50%,_#FF69B4_0%,_transparent_70%)] opacity-40 -z-10"></div>
           <input
             type="text"
             placeholder="Enter keyword..."
