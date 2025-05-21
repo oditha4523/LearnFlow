@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { HiMenu, HiX } from 'react-icons/hi'
 import { motion } from "framer-motion";
 import { fadeIn } from "../utils/motion";
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeLink, setActiveLink] = useState('#home')
+  const navigate = useNavigate();
 
   const navLinks = [
     { href: "#home", label: "Home" },
@@ -75,17 +77,19 @@ const Navbar = () => {
             variants={fadeIn('left', 0.3)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/login')}
             className="bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100"
           >
-            <a href="#login">Log in</a>
+            Login
           </motion.button>
           <motion.button 
             variants={fadeIn('left', 0.4)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/signup')}
             className="bg-white border border-blue-600 text-blue-600 px-6 py-2.5 rounded-lg hover:bg-blue-50 text-sm font-medium transition-all"
           >
-            <a href="#signup">Sign Up</a>
+            Sign Up
           </motion.button>
         </div>
       </div>
@@ -122,17 +126,19 @@ const Navbar = () => {
                 variants={fadeIn('up', 0.4)}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => navigate('/login')}
                 className="w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100"
               >
-                <a href="#login">Login</a>
+                Login
               </motion.button>
               <motion.button 
                 variants={fadeIn('up', 0.5)}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => navigate('/signup')}
                 className="w-full bg-white border border-blue-600 text-blue-600 px-6 py-2.5 rounded-lg hover:bg-blue-50 text-sm font-medium transition-all"
               >
-                <a href="#signup">Sign Up</a>
+                Sign Up
               </motion.button>
             </div>
           </motion.div>
