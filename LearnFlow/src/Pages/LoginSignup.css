@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* General styles for both login and signup forms */
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #f7f7f7;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-image: url('./src/assets/bg-image.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+   /*Heading section */
+   .auth-heading {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  /* Branding section (for Signup heading) */
+  .auth-container h3 {
+    font-size: 20px;
+    margin-top: 5px;
+    margin-top: -10px; 
+    letter-spacing: 1px;
+    opacity: 0.9;
+  }
+  
+  .auth-container h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 10px 0;
+  }
+  
+  .auth-container h2 {
+    font-size: 22px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  /* Form container */
+  
+  .auth-form {
+    background-color: transparent;
+    backdrop-filter: blur(30px);
+    border: 2px solid rgba(205, 33, 248, 0.2);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 420%;
+    max-width: 400px;
+    margin-top: 20px;
+    color: #fff;
+  }
+  .input-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .icon{
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-80%);
+    color: #ece7f1;
+    font-size: 18px;
+    pointer-events: none;
+    
+   }
+  
+  .form-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    
+  }
+  /* Input fields */
+  .auth-input {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 48px;
+     background-color: #2b0260;
+     color: white;
+    font-size: 16px;
+    outline: none;
+  }
+  .auth-input:focus {
+    border: 2px solid #ff69b4;
+  }
+  
+  /* Button */
+  .auth-btn {
+    width: 100%;
+    padding: 12px;
+    background-color:rgb(238, 49, 175);
+    color: white;
+    border: none;
+    border-radius: 48px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  
+  .auth-btn:hover {
+    opacity: 0.9;
+  }
+  
+  /* Footer text */
+  .auth-footer {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccc;
+  }
+  
+  .auth-footer a {
+    color: #ff69b4;
+    text-decoration: none;
+  }
+  
+  .auth-footer a:hover {
+    text-decoration: underline;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  

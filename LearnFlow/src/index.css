@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* customize container here using tailwindcss */
+.section-container {
+  @apply  px-4 sm:px-6 lg:px-8 py-16 container mx-auto;
+}
+
+
+
+@keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-65px);
+    }
+  }
+
+  @keyframes anim {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  

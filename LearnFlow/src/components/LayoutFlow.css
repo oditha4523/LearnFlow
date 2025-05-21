@@ -1,0 +1,105 @@
+/* Main Layout Container */
+.layout-container {
+  width: 90%;
+  max-width: 1200px;          /* ✅ Add this to limit width */
+  margin: 0 auto;              /* ✅ This centers it horizontally */
+  height: calc(100vh - 60px);
+  display: flex;
+  position: relative;
+  margin-bottom: 60px;
+  overflow: hidden;
+  border-radius: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Flow Diagram Container */
+.flow-container {
+  width: 100%;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  
+  
+}
+
+/* Search Bar Section */
+.search-container {
+  padding: 10px;
+  background: #f0f0f0;
+  position: sticky;
+  display: flex;
+  top: 0;
+  z-index: 1;
+  justify-content: center;
+}
+
+.search-input {
+  margin: 10px;
+  width: 250px;
+  padding: 6px 26px;
+  background-color: #8fdcfa;
+  padding: 8px 26px;
+  border-radius: 15px;
+}
+
+.generate-button {
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #8fdcfa;
+  border-radius: 15px;
+  width: 120px;
+  height: 39px;
+  margin-top: 9px;
+}
+
+/* React Flow Wrapper */
+.flow-wrapper {
+  height: calc(100% - 60px);
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 300px;
+  background: #f0f0f0;
+  border-left: 1px solid #ddd;
+  border: none;
+  padding: 20px;
+  /* box-shadow: -2px 0 5px rgba(0,0,0,0.1); */
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+/* Sidebar Animation States */
+.sidebar.visible {
+  transform: translateX(0);
+}
+
+/* Sidebar Content Styles */
+.sidebar-title {
+  margin-top: 0;
+}
+
+.sidebar-content {
+  margin-bottom: 20px;
+}
+
+/* Button Styles */
+.close-button {
+  padding: 6px 26px;
+  background: #f19696;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #c1f1ae;
+} 
