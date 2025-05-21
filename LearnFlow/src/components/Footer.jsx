@@ -13,7 +13,7 @@ const Footer = () => {
       { name: 'Contact Us', href: '#' },
     ],
     getHelp: [
-      { name: 'Support Carrer', href: '#' },
+      { name: 'Support Career', href: '#' },
       { name: '24h Service', href: '#' },
       { name: 'Quick Chat', href: '#' },
     ],
@@ -33,12 +33,12 @@ const Footer = () => {
       variants={fadeIn('up', 0.2)}
       initial="hidden"
       whileInView="show"
-      className="bg-gray-50"
+      className="bg-gray-50 px-4 sm:px-6 lg:px-8 py-16"
     >
-      <div className="section-container">
+      <div className="max-w-7xl mx-auto">
         <motion.div 
           variants={fadeIn('up', 0.3)}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10"
         >
           {/* Brand Column */}
           <motion.div 
@@ -51,11 +51,11 @@ const Footer = () => {
             >
               <div className="w-4 h-4 bg-blue-600 rounded-full opacity-75"></div>
               <div className="w-4 h-4 bg-red-500 rounded-full -ml-2"></div>
-              <span className="text-xl font-medium ml-1">The Next Design</span>
+              <span className="text-xl font-semibold ml-1">The Next Design</span>
             </motion.div>
             <motion.p 
               variants={fadeIn('up', 0.6)}
-              className="text-gray-600 mb-6"
+              className="text-gray-600 mb-6 text-sm sm:text-base"
             >
               The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times.
             </motion.p>
@@ -92,7 +92,7 @@ const Footer = () => {
             variants={fadeIn('left', 0.4)}
             className="lg:col-span-8"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
               {Object.entries(footerLinks).map(([category, links], categoryIndex) => (
                 <motion.div 
                   key={category}
@@ -100,7 +100,7 @@ const Footer = () => {
                 >
                   <motion.h3 
                     variants={textVariant(0.2)}
-                    className="text-lg font-medium mb-4"
+                    className="text-lg font-semibold mb-4"
                   >
                     {category.charAt(0).toUpperCase() + category.slice(1)}
                   </motion.h3>
@@ -116,7 +116,7 @@ const Footer = () => {
                         <motion.a 
                           whileHover={{ x: 5 }}
                           href={link.href} 
-                          className="text-gray-600 hover:text-gray-900"
+                          className="text-gray-600 hover:text-gray-900 text-sm sm:text-base transition-all"
                         >
                           {link.name}
                         </motion.a>
@@ -140,13 +140,13 @@ const Footer = () => {
           >
             <motion.p 
               variants={fadeIn('right', 1.0)}
-              className="text-gray-600 text-sm"
+              className="text-gray-600 text-sm text-center"
             >
-              Copyright © {new Date().getFullYear()} learnflow.com
+              © {new Date().getFullYear()} learnflow.com. All rights reserved.
             </motion.p>
             <motion.p 
               variants={fadeIn('left', 1.0)}
-              className="text-gray-600 text-sm"
+              className="text-gray-600 text-sm text-center"
             >
               Created by Team LearnFlow
             </motion.p>
