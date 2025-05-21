@@ -33,20 +33,20 @@ const MonitorSection = () => {
             variants={textVariant(0.5)}
             className="text-3xl md:text-4xl font-bold text-navy-900 mt-4 mb-6 md:w-4/5"
           >
-            Introducing best mobile carousels
+            Track Your Learning Progress Effortlessly
           </motion.h2>
           <motion.p 
             variants={fadeIn('up', 0.6)}
             className="text-gray-600 mb-8 md:w-4/5"
           >
-            Before the ship is really back. Round, round, all around the world. Round, all around the world. Round, all around the world. Round, all around the world.
+            Stay on top of your learning journey with LearnFlow’s smart progress tracking tools. Visualize your completed topics, monitor areas that need revision, and celebrate milestones with dynamic progress charts. With real-time updates and personalized learning stats, you’re always aware of where you are—and what’s next.
           </motion.p>
           <motion.a 
             variants={fadeIn('up', 0.7)}
             href="#" 
             className="text-blue-500 font-semibold flex items-center gap-2 hover:gap-4 transition-all"
           >
-            Learn more about monitoring
+            Learn more about tracking progress
             <motion.svg 
               variants={fadeIn('left', 0.8)}
               className="w-5 h-5" 
