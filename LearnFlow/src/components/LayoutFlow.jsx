@@ -130,6 +130,15 @@ const LayoutFlow = () => {
             onEdgesChange={onEdgesChange}
             onNodeClick={onNodeClick}
             fitView
+            defaultViewport={{ x: 0, y: 0, zoom: 1 }}
+            minZoom={0.1}
+            maxZoom={4}
+            nodesDraggable={true}
+            nodesConnectable={false}
+            elementsSelectable={true}
+            panOnDrag={true}
+            zoomOnScroll={true}
+            attributionPosition="bottom-right"
           />
         </div>
       </div>

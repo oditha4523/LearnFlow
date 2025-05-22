@@ -135,95 +135,57 @@ def generate_roadmap():
         return jsonify({"error": "Keyword is required"}), 400
     
     #  Retrieve context using RAG
-    relevant_docs = vectorstore.similarity_search(keyword, k=4)
-    retrieved_context = "\n".join([doc.page_content for doc in relevant_docs])
+    try:
+        results = vectorstore.similarity_search_with_score(keyword, k=4)
+        # Set a similarity threshold (tune as needed, e.g., 0.7 for cosine similarity)
+        SIMILARITY_THRESHOLD = 0.7
+        relevant_docs = [doc for doc, score in results if score >= SIMILARITY_THRESHOLD]
+    except AttributeError:
+        # Fallback if method not available
+        relevant_docs = vectorstore.similarity_search(keyword, k=4)
+
+    if not relevant_docs:
+        retrieved_context = "No relevant documents found in the knowledge base."
+    else:
+        retrieved_context = "\n".join([doc.page_content for doc in relevant_docs])
 
     prompt = f"""
-      Generate a learning roadmap for {keyword} in JavaScript object format, compatible with React Flow.
-      
-      Context:
-        {retrieved_context}
+    Generate a comprehensive learning roadmap for {keyword} in JavaScript object format, compatible with React Flow.
 
-      Follow these layout guidelines to create a clear tree structure with no overlapping:
-      1. Use a hierarchical linear layout with diagonal branches
-      2. Horizontal spacing between sibling nodes:
-         - First level: 800 units between branches
-         - Second level: 400 units between branches
-         - Third level: 200 units between branches
-      3. Vertical spacing (y) should be at least 200 units between levels
-      4. Start the first node at (800, 0)
-      5. Position child nodes diagonally below their parent:
-         - First child: offset 300 units left from parent's x position
-         - Second child: offset 150 units left from parent's x position
-         - Third child: same x as parent
-         - Fourth child: offset 150 units right from parent's x position
-         - Fifth child: offset 300 units right from parent's x position
-      6. For deeper levels, maintain the same offset pattern but reduce spacing by half
+    Context:
+      {retrieved_context}
 
-      Ensure the output includes two constants: `nodes` and `edges`, structured exactly like this:
-      nodes = [
-        {{
-          id: '1',
-          type: 'input',
-          data: {{ label: 'input' }},
-          position: {{ x: 800, y: 0 }},
-        }},
-        {{
-          id: '2',
-          data: {{ label: 'node 2' }},
-          position: {{ x: 400, y: 200 }},
-        }},
-        {{
-          id: '2a',
-          data: {{ label: 'node 2a' }},
-          position: {{ x: 200, y: 400 }},  
-        }},
-        {{
-          id: '2b',
-          data: {{ label: 'node 2b' }},
-          position: {{ x: 400, y: 400 }},
-        }},
-        {{
-          id: '2c',
-          data: {{ label: 'node 2c' }},
-          position: {{ x: 600, y: 400 }},
-        }},
-        {{
-          id: '3',
-          data: {{ label: 'node 3' }},
-          position: {{ x: 1200, y: 200 }},
-        }},
-        {{
-          id: '3a',
-          data: {{ label: 'node 3a' }},
-          position: {{ x: 1000, y: 400 }},
-        }},
-        {{
-          id: '3b',
-          data: {{ label: 'node 3b' }},
-          position: {{ x: 1200, y: 400 }},
-        }},
-        {{
-          id: '4',
-          data: {{ label: 'node 4' }},
-          position: {{ x: 1400, y: 400 }},
-        }},
-      ];
+    Layout rules:
+    1. Arrange all main roadmap steps (top-level parent nodes) in a single vertical line, centered horizontally (same x, increasing y), spaced at least 150px apart on the y axis, forming a clear top-to-bottom "road".
+    2. Connect each parent node to the next parent node with a direct edge, forming a linear vertical path.
+    3. For each parent node, generate **all relevant child nodes** (as many as needed for a complete roadmap) and position them in a horizontal row or gentle arc, evenly distributed to the left and right of the parent node, at least 120px away from the parent and at least 120px between each child node.
+    4. **If a child node has its own subtopics, treat it as a parent node and repeat the same layout for its children, recursively, forming a hierarchy.**
+    5. Child nodes should only connect to their immediate parent node, not to other parents or siblings.
+    6. Each parent-child node group must have enough space so that it does **not overlap** with any other parent-child group. Leave at least 150px horizontal and vertical gap between groups.
+    7. Do not allow any nodes to overlap.
+    8. Use x in the range 100–1500 and y in the range 0–1500.
+    9. The output must include two constants: `nodes` and `edges`, structured exactly like this:
+    nodes = [
+      // Example:
+      {{ id: '1', type: 'input', data: {{ label: 'input' }}, position: {{ x: 800, y: 0 }} }},
+      {{ id: '2', data: {{ label: 'node 2' }}, position: {{ x: 800, y: 200 }} }},
+      {{ id: '2a', data: {{ label: 'node 2a' }}, position: {{ x: 600, y: 320 }} }},
+      {{ id: '2b', data: {{ label: 'node 2b' }}, position: {{ x: 1000, y: 320 }} }},
+      {{ id: '2b1', data: {{ label: 'node 2b1' }}, position: {{ x: 1100, y: 440 }} }},
+      // ...more nodes...
+    ];
 
-      edges = [
-        {{ id: 'e12', source: '1', target: '2', animated: true }},
-        {{ id: 'e13', source: '2', target: '3', animated: true }},
-        {{ id: 'e22a', source: '2', target: '2a', animated: true }},
-        {{ id: 'e22b', source: '2', target: '2b', animated: true }},
-        {{ id: 'e22c', source: '2', target: '2c', animated: true }},
-        {{ id: 'e33a', source: '3', target: '3a', animated: true }},
-        {{ id: 'e33b', source: '3', target: '3b', animated: true }},
-        {{ id: 'e33c', source: '3', target: '4', animated: true }},
-      ];
+    edges = [
+      // Example:
+      {{ id: 'e12', source: '1', target: '2', animated: true }},
+      {{ id: 'e22a', source: '2', target: '2a', animated: true }},
+      {{ id: 'e22b', source: '2', target: '2b', animated: true }},
+      {{ id: 'e2b2b1', source: '2b', target: '2b1', animated: true }},
+      // ...more edges...
+    ];
 
-
-      Only output the two constants (`nodes`, `edges`) in valid JavaScript object format. Do not include any extra explanation or text.
-      """
+    Only output the two constants (`nodes`, `edges`) in valid JavaScript object format. Do not include any extra explanation or text.
+        """
 
     try:
         model = genai.GenerativeModel('gemini-1.5-flash')
