@@ -17,6 +17,9 @@ const MonitorSection = () => {
         {/* Left side - Content */}
       
         <motion.div 
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.2 }}
           variants={fadeIn('right', 0.3)}
           className="w-full md:w-1/2 relative"
         >
@@ -66,7 +69,10 @@ const MonitorSection = () => {
 
         {/* Right side - Swiper with background */}
         <motion.div 
-          variants={fadeIn('left', 0.3)}
+          variants={fadeIn('up', 0.3)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.2 }}
           className="w-full md:w-1/2 relative"
         >
           <motion.div 

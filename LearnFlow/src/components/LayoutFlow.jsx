@@ -56,18 +56,34 @@ const LayoutFlow = () => {
         const newNodes = eval(nodesMatch[1]);
         const newEdges = eval(edgesMatch[1]);
 
-          // Add styles to nodes based on their type
-          const styledNodes = newNodes.map(node => {
-            // Check if node is a parent (has outgoing edges)
-            const isParent = newEdges.some(edge => edge.source === node.id);
-            return {
-              ...node,
-              style: isParent ? nodeStyles.parent : nodeStyles.child,
-            };
-          });
+        // Identify parent nodes (nodes with outgoing edges)
+        const parentNodeIds = newEdges.map(edge => edge.source);
+
+        // Add styles to nodes based on their type
+        const styledNodes = newNodes.map(node => {
+          const isParent = parentNodeIds.includes(node.id);
+          return {
+            ...node,
+            style: isParent ? nodeStyles.parent : nodeStyles.child,
+          };
+        });
+
+        // Highlight edges between parent nodes
+        const highlightedEdges = newEdges.map(edge => {
+          const isSourceParent = parentNodeIds.includes(edge.source);
+          const isTargetParent = parentNodeIds.includes(edge.target);
+          // Remove any animated property if present
+          const { animated, ...rest } = edge;
+          return {
+            ...rest,
+            style: (isSourceParent && isTargetParent)
+              ? { stroke: '#cc0000', strokeWidth: 4 } // Highlighted style
+              : { stroke: '#222', strokeWidth: 2 },   // Default style
+          };
+        });
 
         setNodes(styledNodes);
-        setEdges(newEdges);
+        setEdges(highlightedEdges);
         fitView();
       } else {
         console.error('Invalid response format:', result);
@@ -92,12 +108,15 @@ const LayoutFlow = () => {
   };
 
   return (
+    
     // Main Layout Container
     <div className="layout-container">
       {/* Flow Diagram Section */}
       <div className="flow-container">
         {/* Search Bar */}
-        <div className="search-container">
+        <div className="search-container relative">
+          <div className="absolute inset-0 w-full h-full rounded-xl pointer-events-none bg-[radial-gradient(circle_at_20%_50%,_#e3d4ff_0%,_transparent_70%)] opacity-40 -z-10"></div>
+          <div className="absolute inset-0 w-full h-full rounded-xl pointer-events-none bg-[radial-gradient(circle_at_80%_50%,_#FF69B4_0%,_transparent_70%)] opacity-40 -z-10"></div>
           <input
             type="text"
             placeholder="Enter keyword..."
@@ -127,6 +146,15 @@ const LayoutFlow = () => {
             onEdgesChange={onEdgesChange}
             onNodeClick={onNodeClick}
             fitView
+            defaultViewport={{ x: 0, y: 0, zoom: 1 }}
+            minZoom={0.1}
+            maxZoom={4}
+            nodesDraggable={true}
+            nodesConnectable={false}
+            elementsSelectable={true}
+            panOnDrag={true}
+            zoomOnScroll={true}
+            attributionPosition="bottom-right"
           />
         </div>
       </div>
