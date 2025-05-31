@@ -86,18 +86,15 @@ def login():
 
 @app.route("/protected", methods=["GET"])
 @jwt_required()
+
 def protected():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 
-
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-
 genai.configure(api_key=os.environ['GEMINI_API_KEY'])
-
 model = genai.GenerativeModel('gemini-1.5-flash')
-
 
 # ================API integration and RAG system=========================
 

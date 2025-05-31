@@ -56,18 +56,34 @@ const LayoutFlow = () => {
         const newNodes = eval(nodesMatch[1]);
         const newEdges = eval(edgesMatch[1]);
 
-          // Add styles to nodes based on their type
-          const styledNodes = newNodes.map(node => {
-            // Check if node is a parent (has outgoing edges)
-            const isParent = newEdges.some(edge => edge.source === node.id);
-            return {
-              ...node,
-              style: isParent ? nodeStyles.parent : nodeStyles.child,
-            };
-          });
+        // Identify parent nodes (nodes with outgoing edges)
+        const parentNodeIds = newEdges.map(edge => edge.source);
+
+        // Add styles to nodes based on their type
+        const styledNodes = newNodes.map(node => {
+          const isParent = parentNodeIds.includes(node.id);
+          return {
+            ...node,
+            style: isParent ? nodeStyles.parent : nodeStyles.child,
+          };
+        });
+
+        // Highlight edges between parent nodes
+        const highlightedEdges = newEdges.map(edge => {
+          const isSourceParent = parentNodeIds.includes(edge.source);
+          const isTargetParent = parentNodeIds.includes(edge.target);
+          // Remove any animated property if present
+          const { animated, ...rest } = edge;
+          return {
+            ...rest,
+            style: (isSourceParent && isTargetParent)
+              ? { stroke: '#cc0000', strokeWidth: 4 } // Highlighted style
+              : { stroke: '#222', strokeWidth: 2 },   // Default style
+          };
+        });
 
         setNodes(styledNodes);
-        setEdges(newEdges);
+        setEdges(highlightedEdges);
         fitView();
       } else {
         console.error('Invalid response format:', result);

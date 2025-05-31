@@ -6,10 +6,8 @@ import PurposeSection from './components/PurposeSection';
 import FeaturesSection from './components/FeaturesSection';
 import ScheduleSection from './components/ScheduleSection';
 import MonitorSection from './components/MonitorSection';
-import PricingSection from './components/PricingSection';
 import ServicesSection from './components/ServicesSection';
 import TestimonialsSection from './components/TestimonialsSection';
-import NewsletterSection from './components/NewsletterSection';
 import Footer from './components/Footer';
 import { ReactFlowProvider } from 'reactflow';
 import LayoutFlow from './components/LayoutFlow';
@@ -36,6 +34,7 @@ function App() {
               <LayoutFlow />
             </div>
           )}
+          
           <ScheduleSection />
           <MonitorSection />
           {/* <PricingSection /> */}

@@ -51,6 +51,9 @@ const TestimonialsSection = () => {
     <section id="testimonials" className="py-16 px-4 max-w-7xl mx-auto">
       <motion.div 
         variants={fadeIn('up', 0.3)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.2 }}
         className="text-center mb-12"
       >
         <motion.h2 
@@ -68,7 +71,10 @@ const TestimonialsSection = () => {
       </motion.div>
 
       <motion.div 
-        variants={fadeIn('up', 0.5)}
+        variants={fadeIn('up', 0.3)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.2 }}
         className="relative"
       >
         <Swiper
@@ -141,7 +147,10 @@ const TestimonialsSection = () => {
 
         {/* Custom Navigation Buttons */}
         <motion.div 
-          variants={fadeIn('up', 0.7)}
+          variants={fadeIn('up', 0.3)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.2 }}
           className="flex justify-center gap-4 mt-8"
         >
           <motion.button 
