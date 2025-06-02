@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../utils/motion";
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeLink, setActiveLink] = useState('#home')
   const navigate = useNavigate();
@@ -148,4 +148,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default NavBar
