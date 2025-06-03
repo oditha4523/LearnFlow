@@ -27,7 +27,7 @@ function App() {
           <Navbar />
           <Hero />
           <CompanyLogo />
-          <PurposeSection />
+          {/* <PurposeSection /> */}
           <FeaturesSection onBecomePartner={handleBecomePartner} />
           {showLayoutFlow && (
             <div className="flow-container" style={{ margin: '2rem auto' }}>
