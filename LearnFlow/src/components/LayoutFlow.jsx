@@ -267,7 +267,7 @@ const LayoutFlow = () => {
                     className="sidebar-section mb-6"
                   >
                     <h3 className="font-semibold text-lg mb-3 text-indigo-600 flex items-center">
-                      <span className="mr-2">🎯</span>
+                      <span className="mr-2"></span>
                       Key Concepts
                     </h3>
                     <div className="grid grid-cols-1 gap-2">
@@ -290,7 +290,7 @@ const LayoutFlow = () => {
                     className="sidebar-section mb-6"
                   >
                     <h3 className="font-semibold text-lg mb-3 text-indigo-600 flex items-center">
-                      <span className="mr-2">📚</span>
+                      <span className="mr-2"></span>
                       Learning Resources
                     </h3>
                     <div className="space-y-3">
@@ -319,7 +319,7 @@ const LayoutFlow = () => {
                     className="sidebar-section mb-6"
                   >
                     <h3 className="font-semibold text-lg mb-3 text-indigo-600 flex items-center">
-                      <span className="mr-2">💡</span>
+                      <span className="mr-2"></span>
                       Learning Tips
                     </h3>
                     <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">
