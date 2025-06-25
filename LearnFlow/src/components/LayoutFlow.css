@@ -1,44 +1,79 @@
 /* Main Layout Container */
 .layout-container {
-  width: 100%;
+  width: 90%;
+  max-width: 1200px;          /* ✅ Add this to limit width */
+  margin: 0 auto;              /* ✅ This centers it horizontally */
   height: calc(100vh - 60px);
   display: flex;
   position: relative;
   margin-bottom: 60px;
   overflow: hidden;
+  border-radius: 40px;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Flow Diagram Container */
 .flow-container {
-  flex: 1;
+  width: 100%;
   position: relative;
   height: 100%;
   overflow: hidden;
+  z-index: 1;
 }
 
 /* Search Bar Section */
 .search-container {
-  padding: 10px;
-  background: #f0f0f0;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-radius: 0rem;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 32px 0 rgba(31, 38, 135, 0.15);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .search-input {
   margin: 10px;
-  padding: 5px;
   width: 250px;
+  padding: 6px 26px;
+  background-color: #ffffff;
+  padding: 8px 26px;
+  border-radius: 15px;
 }
 
 .generate-button {
   padding: 6px 12px;
   cursor: pointer;
+  background-color: #ffffff;
+  border-radius: 15px;
+  width: 120px;
+  height: 39px;
+  margin-top: 0px;
 }
 
 /* React Flow Wrapper */
 .flow-wrapper {
   height: calc(100% - 60px);
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Make sure ReactFlow's internal elements are clickable */
+.react-flow__node {
+  z-index: 2;
+}
+
+.react-flow__handle {
+  z-index: 3;
+}
+
+.react-flow__edge {
+  z-index: 1;
 }
 
 /* Sidebar Styles */
@@ -48,10 +83,14 @@
   top: 0;
   height: 100%;
   width: 300px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 32px 0 rgba(31, 38, 135, 0.15);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
   border-left: 1px solid #ddd;
+  border: none;
   padding: 20px;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  /* box-shadow: -2px 0 5px rgba(0,0,0,0.1); */
   overflow-y: auto;
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
@@ -74,14 +113,14 @@
 
 /* Button Styles */
 .close-button {
-  padding: 8px 16px;
-  background: #f0f0f0;
+  padding: 6px 26px;
+  background: #f19696;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .close-button:hover {
-  background-color: #e0e0e0;
-} 
+  background-color: #c1f1ae;
+}
