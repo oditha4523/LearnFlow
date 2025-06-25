@@ -11,6 +11,7 @@ const getLayoutedElements = (nodes, edges) => {
   return { nodes, edges };
 };
 
+
 const nodeStyles = {
   parent: {
     background: '#cc0000', // Red color for parent nodes
@@ -60,6 +61,7 @@ const LayoutFlow = () => {
         const newNodes = eval(nodesMatch[1]);
         const newEdges = eval(edgesMatch[1]);
 
+
         // Identify parent nodes (nodes with outgoing edges)
         const parentNodeIds = newEdges.map(edge => edge.source);
 
@@ -88,6 +90,7 @@ const LayoutFlow = () => {
 
         setNodes(styledNodes);
         setEdges(highlightedEdges);
+
         fitView();
       } else {
         console.error('Invalid response format:', result);
