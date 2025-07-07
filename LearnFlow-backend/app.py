@@ -1,20 +1,26 @@
 import os
-import google.generativeai as genai
+import json
+import re
+import datetime
 from flask import Flask, jsonify, request
 from dotenv import load_dotenv
 from flask_cors import CORS
-import json
-import re
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from models import users_collection
-import re
-import datetime
-from langchain_community.document_loaders import UnstructuredPDFLoader
-from langchain_community.vectorstores import Chroma
-from langchain.text_splitter import CharacterTextSplitter
-from langchain_community.document_loaders import PyMuPDFLoader
-from langchain_huggingface import HuggingFaceEmbeddings
+
+# Lazy import heavy dependencies
+def get_genai():
+    import google.generativeai as genai
+    return genai
+
+def get_langchain_modules():
+    from langchain_community.document_loaders import UnstructuredPDFLoader
+    from langchain_community.vectorstores import Chroma
+    from langchain.text_splitter import CharacterTextSplitter
+    from langchain_community.document_loaders import PyMuPDFLoader
+    from langchain_huggingface import HuggingFaceEmbeddings
+    return UnstructuredPDFLoader, Chroma, CharacterTextSplitter, PyMuPDFLoader, HuggingFaceEmbeddings
 
 load_dotenv()
 
@@ -87,12 +93,16 @@ def protected():
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-genai.configure(api_key=os.environ['GEMINI_API_KEY'])
-model = genai.GenerativeModel('gemini-1.5-flash')
+# Initialize genai lazily
+def get_genai_model():
+    genai = get_genai()
+    genai.configure(api_key=os.environ['GEMINI_API_KEY'])
+    return genai.GenerativeModel('gemini-1.5-flash')
 
 # ================API integration and RAG system=========================
 
 def load_pdfs_from_folder(folder_path="data"):
+    _, _, _, PyMuPDFLoader, _ = get_langchain_modules()
     docs = []
     for filename in os.listdir(folder_path):
         if filename.endswith(".pdf"):
@@ -102,18 +112,47 @@ def load_pdfs_from_folder(folder_path="data"):
 
 def load_vectorstore_from_pdfs():
     print("Loading PDFs for vector store...")
+    _, Chroma, CharacterTextSplitter, _, HuggingFaceEmbeddings = get_langchain_modules()
     docs = load_pdfs_from_folder("data")
 
     splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=100)
     split_docs = splitter.split_documents(docs)
 
     embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-    vectorstore = Chroma.from_documents(split_docs, embedding=embedding)
+    vectorstore = Chroma.from_documents(split_docs, embedding=embedding, persist_directory="chroma_store")
 
     return vectorstore
 
-# Create the vectorstore at app startup
-vectorstore = load_vectorstore_from_pdfs()
+# Global variable to store vectorstore (lazy loading)
+vectorstore = None
+
+# Development mode - skip vector store loading
+DEV_MODE = os.getenv("DEV_MODE", "false").lower() == "true"
+
+def get_vectorstore():
+    global vectorstore
+    if DEV_MODE:
+        print("Development mode: Skipping vector store loading")
+        return None
+    
+    if vectorstore is None:
+        # Check if persisted vectorstore exists
+        persist_dir = "chroma_store"
+        if os.path.exists(persist_dir) and os.listdir(persist_dir):
+            print("Loading existing vector store from cache...")
+            try:
+                _, Chroma, _, _, HuggingFaceEmbeddings = get_langchain_modules()
+                embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+                vectorstore = Chroma(persist_directory=persist_dir, embedding_function=embedding)
+                print("Vector store loaded successfully from cache!")
+            except Exception as e:
+                print(f"Error loading cached vector store: {e}")
+                print("Creating new vector store...")
+                vectorstore = load_vectorstore_from_pdfs()
+        else:
+            print("Creating new vector store...")
+            vectorstore = load_vectorstore_from_pdfs()
+    return vectorstore
 
 
 @app.route('/generate_roadmap', methods=['POST'])
@@ -127,18 +166,30 @@ def generate_roadmap():
     
     #  Retrieve context using RAG
     try:
-        results = vectorstore.similarity_search_with_score(keyword, k=4)
-        # Set a similarity threshold (tune as needed, e.g., 0.7 for cosine similarity)
-        SIMILARITY_THRESHOLD = 0.7
-        relevant_docs = [doc for doc, score in results if score >= SIMILARITY_THRESHOLD]
+        vs = get_vectorstore()  # Use lazy loading
+        if vs is None:  # Development mode
+            retrieved_context = "Development mode: No vector store loaded. Using general knowledge."
+        else:
+            results = vs.similarity_search_with_score(keyword, k=4)
+            # Set a similarity threshold (tune as needed, e.g., 0.7 for cosine similarity)
+            SIMILARITY_THRESHOLD = 0.7
+            relevant_docs = [doc for doc, score in results if score >= SIMILARITY_THRESHOLD]
+            
+            if not relevant_docs:
+                retrieved_context = "No relevant documents found in the knowledge base."
+            else:
+                retrieved_context = "\n".join([doc.page_content for doc in relevant_docs])
     except AttributeError:
         # Fallback if method not available
-        relevant_docs = vectorstore.similarity_search(keyword, k=4)
-
-    if not relevant_docs:
-        retrieved_context = "No relevant documents found in the knowledge base."
-    else:
-        retrieved_context = "\n".join([doc.page_content for doc in relevant_docs])
+        vs = get_vectorstore()
+        if vs is None:
+            retrieved_context = "Development mode: No vector store loaded. Using general knowledge."
+        else:
+            relevant_docs = vs.similarity_search(keyword, k=4)
+            if not relevant_docs:
+                retrieved_context = "No relevant documents found in the knowledge base."
+            else:
+                retrieved_context = "\n".join([doc.page_content for doc in relevant_docs])
 
     prompt = f"""
     Generate a comprehensive learning roadmap for {keyword} in JavaScript object format, compatible with React Flow.
@@ -179,7 +230,7 @@ def generate_roadmap():
         """
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = get_genai_model()
         response=model.generate_content(prompt)
         print("Response:", response)
         print("Retrieved context:\n", retrieved_context)
@@ -221,7 +272,7 @@ def generate_node_description():
         }}
         """
         
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = get_genai_model()
         response = model.generate_content(prompt)
         
         # Clean the response text
@@ -278,6 +329,19 @@ def generate_node_description():
     except Exception as e:
         print(f"General error: {e}")
         return jsonify({"error": "Failed to generate description", "details": str(e)}), 500
+
+@app.route("/health", methods=["GET"])
+def health_check():
+    return jsonify({"status": "healthy", "message": "LearnFlow backend is running"}), 200
+
+@app.route('/warmup', methods=['POST'])
+def warmup():
+    """Endpoint to pre-load the vectorstore"""
+    try:
+        vs = get_vectorstore()
+        return jsonify({"message": "Vector store loaded successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": "Failed to load vector store", "details": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
