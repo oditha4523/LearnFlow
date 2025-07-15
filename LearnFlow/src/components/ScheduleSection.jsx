@@ -30,7 +30,6 @@ const ScheduleSection = () => {
           className="w-full md:w-1/2 relative"
         >
           <div className="absolute -top-630 -left-650 w-1550 h-1350 rounded-full bg-[radial-gradient(circle,_#F97316_-20%,_transparent_9%)] -z-10"></div>
-          
           <motion.span 
             variants={fadeIn('up', 0.4)}
             className="text-orange-500 font-semibold"
