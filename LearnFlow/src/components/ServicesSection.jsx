@@ -52,13 +52,13 @@ const ServicesSection = () => {
           variants={textVariant(0.2)}
           className="text-3xl md:text-4xl font-bold mb-6 md:w-4/5"
         >
-          Future of support with new shape
+          Personalize Your Learning with Smart Features
         </motion.h2>
         <motion.p 
           variants={fadeIn('up', 0.5)}
           className="text-gray-600 text-lg mb-4 md:w-4/5"
         >
-          Discuss your goals, determine success metrics, identify problems
+          Customize your journey, stay organized, and unlock your full potential with tools built for modern learners. Discuss your learning goals, track achievements, and overcome challenges with ease.
         </motion.p>
         <motion.div 
           variants={fadeIn('up', 0.6)}
@@ -71,7 +71,7 @@ const ServicesSection = () => {
             <div className="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center">
               <div className="w-2.5 h-2.5 rounded-full bg-indigo-600"></div>
             </div>
-            <span className="text-gray-600">UX design content strategy</span>
+            <span className="text-gray-600">Personalized learning paths</span>
           </motion.div>
           <motion.div 
             variants={fadeIn('right', 0.8)}
@@ -80,7 +80,7 @@ const ServicesSection = () => {
             <div className="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center">
               <div className="w-2.5 h-2.5 rounded-full bg-indigo-600"></div>
             </div>
-            <span className="text-gray-600">Development bring</span>
+            <span className="text-gray-600">AI-enhanced topic suggestions</span>
           </motion.div>
         </motion.div>
       </motion.div>
@@ -95,7 +95,7 @@ const ServicesSection = () => {
             key={index}
             variants={fadeIn('up', 0.3 * (index + 1))}
             whileHover={{ scale: 1.05 }}
-            className="bg-white max-w-72 cursor-pointer rounded-2xl p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center"
+            className="backdrop-blur-lg bg-white/20 border border-white/30 max-w-72 cursor-pointer rounded-2xl p-6 hover:shadow-2xl hover:bg-white/30 transition-all duration-300 flex flex-col items-center text-center shadow-lg"
           >
             <motion.div 
               variants={fadeIn('down', 0.4 * (index + 1))}
@@ -105,13 +105,13 @@ const ServicesSection = () => {
             </motion.div>
             <motion.h3 
               variants={textVariant(0.3)}
-              className="text-xl font-semibold mb-2"
+              className="text-xl font-semibold mb-2 text-gray-800"
             >
               {service.title}
             </motion.h3>
             <motion.p 
               variants={fadeIn('up', 0.5 * (index + 1))}
-              className="text-gray-600 mb-4"
+              className="text-gray-700 mb-4"
             >
               {service.description}
             </motion.p>

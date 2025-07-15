@@ -1,8 +1,8 @@
-import slack from '../assets/slack.png'
-import amazon from '../assets/amazon.png'
-import woocommerce from '../assets/woocommerce.png'
-import meundies from '../assets/meundies.png'
-import sitepoint from '../assets/sitepoint.png'
+import slack from '../assets/mongo2.png'
+import amazon from '../assets/python2.png'
+import woocommerce from '../assets/react2.png'
+import meundies from '../assets/js2.png'
+import sitepoint from '../assets/dart2.png'
 import '../App.css';
 
 const CompanyLogo = () => {

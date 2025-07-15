@@ -3,12 +3,12 @@
 
 export const features = [
     {
-      icon: "🟣", // Replace with your actual icon component or image
+      icon: "", // Replace with your actual icon component or image
       title: "Built for impact",
       description: "We identify and nurture a truly diverse team of designers, developers and marketers"
     },
     {
-      icon: "🔴", // Replace with your actual icon component or image
+      icon: "", // Replace with your actual icon component or image
       title: "In sync with you",
       description: "We work the way you do by adapting to your workflows and rhythm we aim to blend in for a seamless."
     }
@@ -38,26 +38,26 @@ export const features = [
 const services = [
     {
       icon: <BsStack className="w-8 h-8 text-indigo-600" />,
-      title: "Web Design",
-      description: "One for all and all for one, Muskehounds are always ready.",
+      title: "Interactive Modules",
+      description: "Break topics into visual building blocks that help you learn faster and more clearly.One for all and all for one, Muskehounds are always ready.",
       link: "#learn-more"
     },
     {
       icon: <HiLightBulb className="w-8 h-8 text-amber-400" />,
-      title: "Ad-Creatives", 
-      description: "Alphabet Village and the subline of her own road.",
+      title: "Progress Tracking", 
+      description: "Monitor your milestones and track your improvement over time.",
       link: "#learn-more"
     },
     {
       icon: <FiSettings className="w-8 h-8 text-red-400" />,
-      title: "Automation",
-      description: "Little Blind Text should turn around and return.",
+      title: "AI-Powered Guidance",
+      description: "Get dynamic suggestions on what to learn next based on your activity.",
       link: "#learn-more"
     },
     {
       icon: <BiTime className="w-8 h-8 text-cyan-400" />,
-      title: "Infographics",
-      description: "Nothing the copy said could convince her.",
+      title: "Visual Insights",
+      description: "Access intuitive charts and roadmaps to make your progress visible.",
       link: "#learn-more"
     }
   ]

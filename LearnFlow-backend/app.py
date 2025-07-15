@@ -5,24 +5,21 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 import json
 import re
-
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from models import users_collection
 import re
 import datetime
 
+
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
+
 from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import CharacterTextSplitter
-from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_huggingface import HuggingFaceEmbeddings
 
-
 load_dotenv()
-
-
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
@@ -194,6 +191,96 @@ def generate_roadmap():
     
     except Exception as e:
         return jsonify({"error": "Failed to generate roadmap", "details": str(e)})
+    
+#====================Node description generation API=========================#
+@app.route('/generate_node_description', methods=['POST'])
+def generate_node_description():
+    try:
+        data = request.get_json()
+        node_label = data.get('label')
+        keyword = data.get('keyword', '')
+        
+        if not node_label:
+            return jsonify({"error": "Node label is required"}), 400
+
+        prompt = f"""
+        Generate a comprehensive description for the learning topic: "{node_label}" in the context of {keyword}.
+        
+        Please provide a detailed response covering:
+        1. A clear, educational description (2-3 paragraphs) - make it beginner-friendly
+        2. Key concepts and skills involved (3-5 items)
+        3. Learning resources with titles and descriptions (3-5 items)
+        4. Practical tips for learning this topic (3-5 items)
+        
+        IMPORTANT: Return ONLY a valid JSON object with this exact structure (no markdown, no code blocks, no extra text):
+        {{
+            "description": "Write a clear, beginner-friendly explanation here in plain text",
+            "key_concepts": ["concept1", "concept2", "concept3"],
+            "resources": [
+                {{"title": "Resource Name", "description": "What you'll learn", "type": "tutorial"}},
+                {{"title": "Another Resource", "description": "Brief description", "type": "video"}}
+            ],
+            "tips": ["practical tip 1", "practical tip 2", "practical tip 3"]
+        }}
+        """
+        
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        response = model.generate_content(prompt)
+        
+        # Clean the response text
+        response_text = response.text.strip()
+        
+        # Remove markdown code blocks if present
+        if response_text.startswith('```json'):
+            response_text = response_text[7:]  # Remove ```json
+        if response_text.startswith('```'):
+            response_text = response_text[3:]   # Remove ```
+        if response_text.endswith('```'):
+            response_text = response_text[:-3]  # Remove ending ```
+        
+        response_text = response_text.strip()
+        
+        # Try to parse the JSON response
+        try:
+            import json
+            description_data = json.loads(response_text)
+            
+            # Validate required fields
+            if not isinstance(description_data, dict):
+                raise ValueError("Response is not a dictionary")
+            
+            # Ensure all required fields exist with defaults
+            validated_data = {
+                "description": description_data.get("description", "No description available."),
+                "key_concepts": description_data.get("key_concepts", []) if isinstance(description_data.get("key_concepts"), list) else [],
+                "resources": description_data.get("resources", []) if isinstance(description_data.get("resources"), list) else [],
+                "tips": description_data.get("tips", []) if isinstance(description_data.get("tips"), list) else []
+            }
+            
+            return jsonify(validated_data)
+            
+        except (json.JSONDecodeError, ValueError) as e:
+            print(f"JSON parsing error: {e}")
+            print(f"Raw response: {response_text}")
+            
+            # Fallback with structured data
+            return jsonify({
+                "description": f"Learn about {node_label} in the context of {keyword}. This is a fundamental concept that requires understanding and practice.",
+                "key_concepts": [node_label, keyword, "fundamentals", "practice"],
+                "resources": [
+                    {"title": f"{node_label} Tutorial", "description": f"Basic tutorial covering {node_label}", "type": "tutorial"},
+                    {"title": f"{node_label} Documentation", "description": f"Official documentation for {node_label}", "type": "documentation"}
+                ],
+                "tips": [
+                    "Start with basic concepts",
+                    "Practice with small examples",
+                    "Build projects to reinforce learning"
+                ]
+            })
+            
+    except Exception as e:
+        print(f"General error: {e}")
+        return jsonify({"error": "Failed to generate description", "details": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
