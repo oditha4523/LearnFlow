@@ -52,13 +52,13 @@ const ServicesSection = () => {
           variants={textVariant(0.2)}
           className="text-3xl md:text-4xl font-bold mb-6 md:w-4/5"
         >
-          Future of support with new shape
+          Personalize Your Learning with Smart Features
         </motion.h2>
         <motion.p 
           variants={fadeIn('up', 0.5)}
           className="text-gray-600 text-lg mb-4 md:w-4/5"
         >
-          Discuss your goals, determine success metrics, identify problems
+          Customize your journey, stay organized, and unlock your full potential with tools built for modern learners. Discuss your learning goals, track achievements, and overcome challenges with ease.
         </motion.p>
         <motion.div 
           variants={fadeIn('up', 0.6)}
@@ -71,7 +71,7 @@ const ServicesSection = () => {
             <div className="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center">
               <div className="w-2.5 h-2.5 rounded-full bg-indigo-600"></div>
             </div>
-            <span className="text-gray-600">UX design content strategy</span>
+            <span className="text-gray-600">Personalized learning paths</span>
           </motion.div>
           <motion.div 
             variants={fadeIn('right', 0.8)}
@@ -80,7 +80,7 @@ const ServicesSection = () => {
             <div className="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center">
               <div className="w-2.5 h-2.5 rounded-full bg-indigo-600"></div>
             </div>
-            <span className="text-gray-600">Development bring</span>
+            <span className="text-gray-600">AI-enhanced topic suggestions</span>
           </motion.div>
         </motion.div>
       </motion.div>
