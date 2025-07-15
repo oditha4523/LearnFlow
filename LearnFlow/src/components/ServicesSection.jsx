@@ -38,6 +38,9 @@ const ServicesSection = () => {
     <section id="services" className="py-20 container mx-auto px-4 sm:px-6 lg:px-8">
      <motion.div 
       variants={fadeIn('up', 0.3)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false, amount: 0.2 }}
       className='flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-24'
      >
        {/* Header */}
@@ -92,7 +95,7 @@ const ServicesSection = () => {
             key={index}
             variants={fadeIn('up', 0.3 * (index + 1))}
             whileHover={{ scale: 1.05 }}
-            className="bg-white max-w-72 cursor-pointer rounded-2xl p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center"
+            className="backdrop-blur-lg bg-white/20 border border-white/30 max-w-72 cursor-pointer rounded-2xl p-6 hover:shadow-2xl hover:bg-white/30 transition-all duration-300 flex flex-col items-center text-center shadow-lg"
           >
             <motion.div 
               variants={fadeIn('down', 0.4 * (index + 1))}
@@ -102,13 +105,13 @@ const ServicesSection = () => {
             </motion.div>
             <motion.h3 
               variants={textVariant(0.3)}
-              className="text-xl font-semibold mb-2"
+              className="text-xl font-semibold mb-2 text-gray-800"
             >
               {service.title}
             </motion.h3>
             <motion.p 
               variants={fadeIn('up', 0.5 * (index + 1))}
-              className="text-gray-600 mb-4"
+              className="text-gray-700 mb-4"
             >
               {service.description}
             </motion.p>
