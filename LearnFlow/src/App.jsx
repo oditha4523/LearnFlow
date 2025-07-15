@@ -4,6 +4,7 @@ import Login from "./Pages/Login.jsx";
 import SignUp from "./Pages/signup.jsx";
 import HomePage from './Pages/HomePage.jsx';
 import { Routes, Route } from 'react-router-dom';
+import { ReactFlowProvider } from 'reactflow';
 
 
 function App() {
