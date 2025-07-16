@@ -1,0 +1,21 @@
+# Python
+venv/
+__pycache__/
+*.sqlite3
+*.log
+
+# Node
+node_modules/
+
+# VSCode/IDE
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Build Artifacts
+dist/
+build/
+.env
