@@ -39,9 +39,14 @@ const LayoutFlow = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [nodeDescription, setNodeDescription] = useState(null);
   const [isLoadingDescription, setIsLoadingDescription] = useState(false);
+  const [isGeneratingRoadmap, setIsGeneratingRoadmap] = useState(false);
 
   // API call to generate roadmap
   const fetchRoadmap = async (keyword) => {
+    if (!keyword.trim()) return;
+    
+    setIsGeneratingRoadmap(true);
+    
     try {
       const response = await fetch('http://localhost:5000/generate_roadmap', {
         method: 'POST',
@@ -97,6 +102,8 @@ const LayoutFlow = () => {
       }
     } catch (error) {
       console.error('Error fetching roadmap:', error);
+    } finally {
+      setIsGeneratingRoadmap(false);
     }
   };
 
@@ -173,20 +180,29 @@ const LayoutFlow = () => {
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') {
+              if (e.key === 'Enter' && !isGeneratingRoadmap) {
                 fetchRoadmap(e.target.value);
               }
             }}
             className="search-input"
+            disabled={isGeneratingRoadmap}
           />
           <motion.button
             variants={fadeIn('left', 0.6)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => fetchRoadmap(keyword)}
-            className="generate-button"
+            whileHover={!isGeneratingRoadmap ? { scale: 1.05 } : {}}
+            whileTap={!isGeneratingRoadmap ? { scale: 0.95 } : {}}
+            onClick={() => !isGeneratingRoadmap && fetchRoadmap(keyword)}
+            className={`generate-button ${isGeneratingRoadmap ? 'loading' : ''}`}
+            disabled={isGeneratingRoadmap}
           >
-            Generate
+            {isGeneratingRoadmap ? (
+              <div className="flex items-center space-x-2">
+                <div className="w-4 h-4 border-2 border-gray-600 border-t-transparent rounded-full animate-spin"></div>
+                <span>Generating...</span>
+              </div>
+            ) : (
+              'Generate'
+            )}
           </motion.button>
         </motion.div>
 
@@ -195,6 +211,22 @@ const LayoutFlow = () => {
           variants={fadeIn('up', 0.7)}
           className="flow-wrapper"
         >
+          {/* Loading Overlay */}
+          {isGeneratingRoadmap && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex items-center justify-center"
+            >
+              <div className="text-center">
+                <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">Generating Roadmap</h3>
+                <p className="text-sm text-gray-600">Creating your personalized learning path...</p>
+              </div>
+            </motion.div>
+          )}
+
           <ReactFlow
             nodes={nodes}
             edges={edges}

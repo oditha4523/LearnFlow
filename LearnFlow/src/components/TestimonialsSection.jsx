@@ -5,45 +5,43 @@ import 'swiper/css/navigation';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
+import YasithImage from "../assets/Yasith.jpg";
+import SachinthaImage from "../assets/Sachintha.jpg";
+import AshiniImage from "../assets/Ashini.jpg";
+import NimeshaImage from "../assets/Nimesha.jpg";
+import OdithaImage from "../assets/Oditha.jpg";
 
 const testimonials = [
   {
     id: 1,
-    name: "Robin Ayala Doe", 
-    image: "https://randomuser.me/api/portraits/men/77.jpg",
-    text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast.",
+    name: "Yasith Banula", 
+    image: YasithImage,
+    text: "Currently studying Computing and Information Systems at Sabaragamuwa University of Sri Lanka, I have skills in Tailwind CSS, MySQL, and Git, with a keen interest in AI and Front-End Development.",
   },
   {
     id: 2,
-    name: "John De marli",
-    image: "https://randomuser.me/api/portraits/women/90.jpg", 
-    text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.",
+    name: "Sachintha Lakshan",
+    image: SachinthaImage, 
+    text: "𝐈 𝐚𝐦 𝐬𝐭𝐮𝐝𝐞𝐧𝐭 𝐚𝐭 𝐅𝐚𝐜𝐮𝐥𝐭𝐲 𝐨𝐟 𝐂𝐨𝐦𝐩𝐮𝐭𝐢𝐧𝐠 𝐒𝐚𝐛𝐚𝐫𝐚𝐠𝐚𝐦𝐮𝐰𝐚 𝐔𝐧𝐢𝐯𝐞𝐫𝐬𝐢𝐭𝐲 𝐨𝐟 𝐒𝐫𝐢 𝐋𝐚𝐧𝐤𝐚 .Currently, I'm 𝐥𝐞𝐚𝐫𝐧𝐢𝐧𝐠 and 𝐞𝐱𝐩𝐥𝐨𝐫𝐢𝐧𝐠  𝐌𝐄𝐑𝐍 𝐒𝐭𝐚𝐜𝐤 Web development  ,𝐉𝐚𝐯𝐚 & 𝐒𝐩𝐫𝐢𝐧𝐠 𝐁𝐨𝐨𝐭 – Backend development",
   },
   {
     id: 3,
-    name: "Rowhan Smith",
-    image: "https://randomuser.me/api/portraits/men/90.jpg",
-    text: "When she reached the first hills of the Mountains, she had a last view back on the of her hometown Bookmarksgrove, the headline.",
+    name: "Ashini Ranaweera",
+    image: AshiniImage,
+    text: "I'm a passionate and creative professional with a strong interest in data-driven insights, strategic project management, and user-centered design. I enjoy building meaningful digital experiences",
   },
   {
     id: 4,
-    name: "Sarah Johnson",
-    image: "https://randomuser.me/api/portraits/women/45.jpg",
-    text: "The customer service has been exceptional. They went above and beyond to help me solve my problems and were always available when I needed them.",
+    name: "Nimesha Herath",
+    image: NimeshaImage,
+    text: "I'm a passionate and creative frontend developer with a strong enthusiasm for modern web technologies, especially React. I enjoy bringing ideas to life through clean, responsive, and user-friendly interfaces. ",
   },
   {
     id: 5,
-    name: "Michael Chen",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    text: "I've been using their services for over a year now and couldn't be happier. The platform is intuitive and the features are exactly what I needed for my business.",
-  },
-  {
-    id: 6,
-    name: "Emma Wilson",
-    image: "https://randomuser.me/api/portraits/women/28.jpg",
-    text: "What impressed me most was how quickly they responded to my requests. The team is professional, knowledgeable, and truly cares about their customers' success.",
-  },
-
+    name: "Oditha Weerasekara",
+    image: OdithaImage,
+    text: "I'm a with a strong interest in emerging technologies, system design, and user-centered development.",
+  }
 ];
 
 const TestimonialsSection = () => {
@@ -60,7 +58,7 @@ const TestimonialsSection = () => {
           variants={textVariant(0.2)}
           className="text-3xl md:text-4xl font-bold mb-4"
         >
-          What our happy client say
+          Our Team
         </motion.h2>
         <motion.p 
           variants={fadeIn('up', 0.4)}
