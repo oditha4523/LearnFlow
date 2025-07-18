@@ -1,25 +1,14 @@
-import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import CompanyLogo from './components/CompanyLogo';
-import PurposeSection from './components/PurposeSection';
-import FeaturesSection from './components/FeaturesSection';
-import ScheduleSection from './components/ScheduleSection';
-import MonitorSection from './components/MonitorSection';
-import ServicesSection from './components/ServicesSection';
-import TestimonialsSection from './components/TestimonialsSection';
-import Footer from './components/Footer';
-import { ReactFlowProvider } from 'reactflow';
-import LayoutFlow from './components/LayoutFlow';
+
+import React from 'react';
+import Login from "./Pages/Login.jsx";
+import SignUp from "./Pages/signup.jsx";
+import HomePage from './Pages/HomePage.jsx';
+import { Routes, Route } from 'react-router-dom';
+
 
 function App() {
-  const [showLayoutFlow, setShowLayoutFlow] = useState(false);
-
-  const handleBecomePartner = () => {
-    setShowLayoutFlow(true);
-  };
-
   return (
+
     <ReactFlowProvider>
       <main className="relative min-h-screen overflow-x-hidden">
         <div className="absolute -top-28 -left-28 w-[500px] h-[500px] bg-gradient-to-tr from-indigo-500/20 to-pink-500/20 rounded-full blur-[80px] -z-10"></div>
@@ -45,6 +34,7 @@ function App() {
         </div>
       </main>
     </ReactFlowProvider>
+
   );
 }
 

@@ -10,8 +10,8 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 from models import users_collection
 import re
 import datetime
-
-from langchain_community.document_loaders import UnstructuredPDFLoader
+from langchain_community.document_loaders import PyMuPDFLoader
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
