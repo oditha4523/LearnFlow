@@ -10,32 +10,38 @@ const ServicesSection = () => {
   const services = [
     {
       icon: <BsStack className="w-8 h-8 text-indigo-600" />,
-      title: "Web Design",
-      description: "One for all and all for one, Muskehounds are always ready.",
+      title: "AI-Generated Roadmaps",
+      description: "Get personalized learning paths tailored to your goals and skill level, powered by advanced AI technology.",
       link: "#learn-more"
     },
     {
       icon: <HiLightBulb className="w-8 h-8 text-amber-400" />,
-      title: "Ad-Creatives", 
-      description: "Alphabet Village and the subline of her own road.",
+      title: "Smart Learning Paths", 
+      description: "Discover optimized learning sequences that adapt to your progress and learning style for maximum efficiency.",
       link: "#learn-more"
     },
     {
       icon: <FiSettings className="w-8 h-8 text-red-400" />,
-      title: "Automation",
-      description: "Little Blind Text should turn around and return.",
+      title: "Progress Tracking",
+      description: "Monitor your learning journey with detailed analytics and milestone tracking to stay motivated and on track.",
       link: "#learn-more"
     },
     {
       icon: <BiTime className="w-8 h-8 text-cyan-400" />,
-      title: "Infographics",
-      description: "Nothing the copy said could convince her.",
+      title: "Interactive Learning",
+      description: "Engage with dynamic content, quizzes, and hands-on exercises designed to reinforce your knowledge effectively.",
       link: "#learn-more"
     }
   ]
 
   return (
-    <section id="services" className="py-20 container mx-auto px-4 sm:px-6 lg:px-8">
+
+    <section id="services" className="py-20 container mx-auto px-4 sm:px-6 lg:px-8 relative">
+      
+      {/* Background Circles */}
+      <div className="absolute -top-52 -left-192 w-480 h-480 rounded-full bg-[radial-gradient(circle,_#e3d4ff_0%,_transparent_50%)] -z-10"></div>
+      <div className="absolute -top-176 -right-116 w-580 h-580 rounded-full bg-[radial-gradient(circle,_#87CEEB_-70%,_transparent_40%)] -z-10"></div>
+      
      <motion.div 
       variants={fadeIn('up', 0.3)}
       initial="hidden"
@@ -43,6 +49,7 @@ const ServicesSection = () => {
       viewport={{ once: false, amount: 0.2 }}
       className='flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-24'
      >
+
        {/* Header */}
        <motion.div 
         variants={fadeIn('right', 0.4)}

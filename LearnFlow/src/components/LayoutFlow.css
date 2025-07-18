@@ -1,7 +1,7 @@
 /* Main Layout Container */
 .layout-container {
   width: 90%;
-  max-width: 1200px;          /* ✅ Add this to limit width */
+  max-width: 1500px;          /* ✅ Add this to limit width */
   margin: 0 auto;              /* ✅ This centers it horizontally */
   height: calc(100vh - 60px);
   display: flex;
@@ -82,7 +82,7 @@
   right: 0;
   top: 0;
   height: 100%;
-  width: 300px;
+  width: 400px;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 32px 0 rgba(31, 38, 135, 0.15);
   backdrop-filter: blur(8px) saturate(180%);
@@ -123,4 +123,22 @@
 
 .close-button:hover {
   background-color: #c1f1ae;
+}
+
+/* Loading States */
+.generate-button.loading {
+  background-color: #e5e7eb;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.generate-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.search-input:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.7;
 }

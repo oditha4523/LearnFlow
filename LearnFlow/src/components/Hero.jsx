@@ -37,7 +37,7 @@ const Hero = () => {
           whileInView="show"
           className="text-gray-600 text-lg md:text-xl max-w-xl"
         >
-          Get the most accurate leads, sales people training and conversions, tools and more — all within the same one billing.
+          Get the most accurate leads, sales people training and conversions, tools and more  all within the same one billing.
         </motion.p>
 
         <motion.div 
