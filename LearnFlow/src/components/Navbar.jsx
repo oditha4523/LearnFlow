@@ -12,9 +12,9 @@ const Navbar = () => {
 
   const navLinks = [
     { href: "#home", label: "Home" },
-    { href: "#about", label: "About Us" },
+    { href: "#features", label: "Roadmaps" },
     { href: "#services", label: "Our Service" },
-    { href: "#testimonials", label: "Testimonials" },
+    { href: "#testimonials", label: "About Us" },
   ]
 
   return (
@@ -25,25 +25,11 @@ const Navbar = () => {
       viewport={{ once: true }}
       className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm"
     >
-      <div className="w-full flex justify-between items-center container mx-auto px-4 sm:px-6 lg:px-8 md:h-20 h-16">
-        {/* Logo */}
-        <motion.div 
-          variants={fadeIn('right', 0.3)}
-          className="flex items-center gap-1 cursor-pointer"
-        >
-          <motion.div 
-            whileHover={{ scale: 1.1 }}
-            className="w-4 h-4 bg-blue-600 rounded-full opacity-75 hover:opacity-100 transition-opacity"
-          ></motion.div>
-          <motion.div 
-            whileHover={{ scale: 1.1 }}
-            className="w-4 h-4 bg-red-500 rounded-full -ml-2 hover:opacity-75 transition-opacity"
-          ></motion.div>
-        </motion.div>
+      <div className="w-full flex justify-center items-center container mx-auto px-4 sm:px-6 lg:px-8 md:h-20 h-16">
         {/* Mobile Menu Button */}
         <motion.button 
           variants={fadeIn('left', 0.3)}
-          className="md:hidden p-2"
+          className="md:hidden p-2 absolute right-4"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? (
@@ -71,28 +57,6 @@ const Navbar = () => {
             </motion.a>
           ))}
         </motion.div>
-
-        {/* CTA Buttons - Desktop */}
-        <div className="hidden md:flex gap-3">
-          <motion.button 
-            variants={fadeIn('left', 0.3)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/login')}
-            className="bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100"
-          >
-            Login
-          </motion.button>
-          <motion.button 
-            variants={fadeIn('left', 0.4)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/signup')}
-            className="bg-white border border-blue-600 text-blue-600 px-6 py-2.5 rounded-lg hover:bg-blue-50 text-sm font-medium transition-all"
-          >
-            Sign Up
-          </motion.button>
-        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -123,24 +87,7 @@ const Navbar = () => {
               </motion.a>
             ))}
             <div className="flex flex-col gap-3 pt-2">
-              <motion.button 
-                variants={fadeIn('up', 0.4)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => navigate('/login')}
-                className="w-full bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg hover:shadow-blue-100"
-              >
-                Login
-              </motion.button>
-              <motion.button 
-                variants={fadeIn('up', 0.5)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => navigate('/signup')}
-                className="w-full bg-white border border-blue-600 text-blue-600 px-6 py-2.5 rounded-lg hover:bg-blue-50 text-sm font-medium transition-all"
-              >
-                Sign Up
-              </motion.button>
+              {/* Mobile Login/Signup buttons removed */}
             </div>
           </motion.div>
         </motion.div>

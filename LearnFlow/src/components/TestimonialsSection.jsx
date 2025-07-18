@@ -60,12 +60,6 @@ const TestimonialsSection = () => {
         >
           Our Team
         </motion.h2>
-        <motion.p 
-          variants={fadeIn('up', 0.4)}
-          className="text-gray-600"
-        >
-          Things that make it the best place to start trading
-        </motion.p>
       </motion.div>
 
       <motion.div 
