@@ -1,0 +1,91 @@
+1. Python Basics
+Variables and Data Types (int, float, str, bool)
+
+Input/Output (input(), print())
+
+Comments and Code Style
+
+Basic Arithmetic Operations
+
+2. Control Flow
+Conditional Statements (if, elif, else)
+
+Comparison and Logical Operators
+
+Loops (for, while)
+
+Loop Control Statements (break, continue)
+
+3. Data Structures
+Lists (indexing, slicing, methods)
+
+Tuples
+
+Sets
+
+Dictionaries (key-value pairs)
+
+List Comprehensions
+
+4. Functions
+Defining and Calling Functions
+
+Parameters and Return Values
+
+Default and Keyword Arguments
+
+*args and **kwargs
+
+Lambda Functions
+
+5. Modules and Packages
+Importing Modules (import, from)
+
+Using Standard Libraries (math, random, datetime)
+
+Creating and Using Your Own Modules
+
+Installing Packages with pip
+
+6. File Handling
+Reading and Writing Text Files
+
+Using with Statement
+
+Working with File Paths
+
+7. Error Handling
+Exceptions (try, except, finally)
+
+Common Error Types (ValueError, TypeError, etc.)
+
+Custom Exceptions
+
+8. Object-Oriented Programming (OOP)
+Classes and Objects
+
+Attributes and Methods
+
+Inheritance
+
+Encapsulation and Polymorphism
+
+__init__, __str__, and other magic methods
+
+9. Working with External Libraries
+NumPy (basic arrays)
+
+Pandas (DataFrames and basic data manipulation)
+
+Matplotlib (basic plotting)
+
+Requests (HTTP requests)
+
+10. Project Practice
+Build simple CLI apps (e.g., calculator, to-do list)
+
+Automate a daily task (e.g., file renaming)
+
+Create a mini web scraper or data visualizer
+
+Work on a beginner-level open-source project
