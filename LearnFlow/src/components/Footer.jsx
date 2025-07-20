@@ -49,15 +49,15 @@ const Footer = () => {
               variants={fadeIn('down', 0.5)}
               className="flex items-center gap-1 mb-6"
             >
-              <div className="w-4 h-4 bg-blue-600 rounded-full opacity-75"></div>
-              <div className="w-4 h-4 bg-red-500 rounded-full -ml-2"></div>
-              <span className="text-xl font-medium ml-1">The Next Design</span>
+              {/* <div className="w-4 h-4 bg-blue-600 rounded-full opacity-75"></div>
+              <div className="w-4 h-4 bg-red-500 rounded-full -ml-2"></div> */}
+              <span className="text-xl font-medium ml-1">LearnFlow</span>
             </motion.div>
             <motion.p 
               variants={fadeIn('up', 0.6)}
               className="text-gray-600 mb-6"
             >
-              The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times.
+              Navigate Your Learning Journey with Ease
             </motion.p>
             <motion.div 
               variants={fadeIn('up', 0.7)}
