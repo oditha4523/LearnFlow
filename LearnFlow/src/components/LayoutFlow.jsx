@@ -159,7 +159,7 @@ const LayoutFlow = () => {
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.2 }}
-      className="layout-container"
+      className="layout-container border-2 border-gray-300 rounded-lg shadow-lg"
     >
       {/* Flow Diagram Section */}
       <motion.div 
@@ -169,7 +169,7 @@ const LayoutFlow = () => {
         {/* Search Bar */}
         <motion.div 
           variants={fadeIn('down', 0.5)}
-          className="search-container relative"
+          className="search-container relative border border-gray-100 rounded-xl bg-white/50 backdrop-blur-sm shadow-sm"
         >
           <div className="absolute inset-0 w-full h-full rounded-xl pointer-events-none bg-[radial-gradient(circle_at_20%_50%,_#e3d4ff_0%,_transparent_70%)] opacity-40 -z-10"></div>
           <div className="absolute inset-0 w-full h-full rounded-xl pointer-events-none bg-[radial-gradient(circle_at_80%_50%,_#FF69B4_0%,_transparent_70%)] opacity-40 -z-10"></div>
@@ -209,7 +209,7 @@ const LayoutFlow = () => {
         {/* React Flow Diagram */}
         <motion.div 
           variants={fadeIn('up', 0.7)}
-          className="flow-wrapper"
+          className="flow-wrapper border border-gray-200 rounded-lg bg-white shadow-sm"
         >
           {/* Loading Overlay */}
           {isGeneratingRoadmap && (
