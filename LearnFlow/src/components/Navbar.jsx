@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { HiMenu, HiX } from 'react-icons/hi'
 import { motion } from "framer-motion";
 import { fadeIn } from "../utils/motion";
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/logooo.png';
 
 
 const Navbar = () => {
@@ -25,21 +26,13 @@ const Navbar = () => {
       viewport={{ once: true }}
       className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm"
     >
-      <div className="w-full flex justify-center items-center container mx-auto px-4 sm:px-6 lg:px-8 md:h-20 h-16">
-        {/* Mobile Menu Button */}
-        <motion.button 
-          variants={fadeIn('left', 0.3)}
-          className="md:hidden p-2 absolute right-4"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? (
-            <HiX className="h-6 w-6" />
-          ) : (
-            <HiMenu className="h-6 w-6" />
-          )}
-        </motion.button>
+      <div className="w-full flex justify-between items-center container mx-auto px-4 sm:px-6 lg:px-8 md:h-20 h-16">
+        {/* Logo (left) */}
+        <div className="flex items-center gap-4 cursor-pointer" onClick={() => navigate('/') }>
+          <img src={logo} alt="LearnFlow Logo" className="h-14 sm:h-16 w-auto" />
+        </div>
 
-        {/* Navigation Links - Desktop */}
+        {/* Navigation Links - Desktop (center) */}
         <motion.div 
           variants={fadeIn('down', 0.3)}
           className="hidden md:flex items-center gap-10"
@@ -57,6 +50,24 @@ const Navbar = () => {
             </motion.a>
           ))}
         </motion.div>
+
+        {/* CTA Buttons - Desktop (right) */}
+        <div className="hidden md:flex items-center gap-3">
+          
+        </div>
+
+        {/* Mobile Menu Button */}
+        <motion.button 
+          variants={fadeIn('left', 0.3)}
+          className="md:hidden p-2"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? (
+            <HiX className="h-6 w-6" />
+          ) : (
+            <HiMenu className="h-6 w-6" />
+          )}
+        </motion.button>
       </div>
 
       {/* Mobile Menu */}
