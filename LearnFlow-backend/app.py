@@ -61,9 +61,6 @@ from langchain_huggingface import HuggingFaceEmbeddings
 # Local imports
 from models import users_collection
 
-# Selenium imports
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service 
 
 # ===================================================================================
 # CONFIGURATION AND INITIALIZATION
@@ -87,10 +84,6 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=os.environ['GEMINI_API_KEY'])
 model = genai.GenerativeModel('gemini-1.5-flash')
 
-#Selenium WebDriver setup
-
-service = Service(executable_path="chromedriver.exe")
-driver = webdriver.Chrome(service=service)
 
 # ===================================================================================
 # UTILITY FUNCTIONS
